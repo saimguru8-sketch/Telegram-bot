@@ -19,24 +19,58 @@
     <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
 
     <!-- Top Hero Section matching exact reference design -->
-        <!-- Header Section with Exact Reference Image Banner -->
-    <header class="w-full pt-6 pb-2 px-4 max-w-md flex flex-col items-center mx-auto">
-      <div class="w-full flex flex-col items-start px-1 relative mb-3">
-        <!-- JOIN US! Badge -->
-        <div class="bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-xl text-white font-black text-xs tracking-wider mb-2 border border-white/20 shadow-sm">
-          JOIN US!
-        </div>
-        <!-- Title Text -->
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight leading-snug text-white">
-          As an official Chip Seller to earn <span class="text-yellow-300 font-extrabold">₹500K monthly.</span>
-        </h2>
+            <!-- Header Hero Section with Exact Vector Illustration matching image_10.png -->
+    <header class="w-full pt-8 pb-4 px-5 max-w-md mx-auto flex flex-col justify-between relative overflow-hidden">
+      <!-- JOIN US Badge -->
+      <div class="inline-block self-start bg-white/20 backdrop-blur-md px-3.5 py-1 rounded-xl text-white font-extrabold text-xs tracking-wider mb-2 border border-white/20 shadow-sm z-30">
+        JOIN US!
       </div>
+      
+      <!-- Text Title -->
+      <h2 class="text-xl sm:text-2xl font-bold text-white leading-tight max-w-[240px] mb-6 z-30">
+        As an official Chip Seller to earn <span class="text-amber-300 font-extrabold">₹500K monthly.</span>
+      </h2>
 
-      <!-- Reference Banner Graphic -->
-      <div class="w-full relative rounded-2xl overflow-hidden shadow-lg border border-white/10">
-        <img src="https://i.ibb.co/6y4G62b/chip-seller-banner.png" alt="Chip Seller Graphic Banner" class="w-full h-auto object-cover display-block">
+      <!-- CSS Pure Vector Illustration (No External Image Needed) -->
+      <div class="relative w-full h-36 flex justify-end items-end pr-2 mb-2 z-20">
+        <!-- Coin Stack -->
+        <div class="absolute bottom-1 right-20 flex flex-col items-center z-10 scale-90">
+          <div class="w-10 h-3 bg-amber-400 rounded-full border border-amber-300 shadow-sm -mb-1"></div>
+          <div class="w-10 h-3 bg-amber-400 rounded-full border border-amber-300 shadow-sm -mb-1"></div>
+          <div class="w-10 h-3 bg-amber-400 rounded-full border border-amber-300 shadow-sm -mb-1"></div>
+          <div class="w-11 h-3.5 bg-amber-500 rounded-full border border-amber-300 shadow-md"></div>
+        </div>
+        
+        <!-- Kneeling Person holding Big Coin (Matching style) -->
+        <div class="absolute bottom-0 right-28 flex items-end z-20 scale-90">
+          <!-- The Coin -->
+          <div class="w-7 h-7 bg-amber-300 rounded-full border-2 border-amber-400 shadow-md mr-[-8px] mb-2 z-30"></div>
+          <!-- The Person -->
+          <div class="flex flex-col items-center">
+            <div class="w-3.5 h-3.5 bg-amber-100 rounded-full mb-0.5"></div>
+            <div class="w-6 h-7 bg-cyan-600 rounded-t-md"></div>
+            <div class="w-7 h-4 bg-slate-800 rounded-b-md"></div>
+          </div>
+        </div>
+
+        <!-- Standing People pointing (Matching styles) -->
+        <div class="flex items-end space-x-1 z-20 scale-90">
+          <!-- Standing Person with Yellow Pants -->
+          <div class="flex flex-col items-center">
+            <div class="w-3.5 h-3.5 bg-amber-100 rounded-full mb-0.5"></div>
+            <div class="w-6 h-9 bg-cyan-500 rounded-t-md"></div>
+            <div class="w-6 h-10 bg-amber-400 rounded-b-md"></div>
+          </div>
+          <!-- Pointing Person with Red Top -->
+          <div class="flex flex-col items-center">
+            <div class="w-3.5 h-3.5 bg-amber-100 rounded-full mb-0.5"></div>
+            <div class="w-5 h-8 bg-rose-500 rounded-t-md"></div>
+            <div class="w-5 h-10 bg-indigo-900 rounded-b-md"></div>
+          </div>
+        </div>
       </div>
     </header>
+    
 
 
     <!-- Main White Bottom Card Form Section -->
