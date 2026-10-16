@@ -18,12 +18,56 @@
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
 
-        <!-- Header Section with Exact Reference Banner Image -->
-    <header class="w-full pt-4 pb-2 px-4 max-w-md mx-auto flex flex-col items-center">
-      <div class="w-full relative rounded-2xl overflow-hidden shadow-xl border border-white/10">
-        <img src="https://i.ibb.co/6y4G62b/chip-seller-banner.png" alt="Chip Seller Graphic Banner" class="w-full h-auto object-cover block">
+            <!-- Permanent SVG Banner Section (No Broken Image Links) -->
+    <header class="w-full pt-6 pb-2 px-4 max-w-md mx-auto flex flex-col items-start relative">
+      <!-- Speech Bubble Badge -->
+      <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-white font-extrabold text-xs tracking-wider mb-2 border border-white/20 shadow-sm">
+        JOIN US!
+      </div>
+
+      <!-- Main Title Text -->
+      <h2 class="text-xl font-bold text-white leading-tight max-w-[260px] mb-4">
+        As an official Chip Seller to earn <span class="text-amber-300 font-extrabold">₹500K monthly.</span>
+      </h2>
+
+      <!-- Embedded Vector Characters & Coin Stack -->
+      <div class="w-full flex justify-end items-end h-28 pr-2 -mt-6">
+        <svg viewBox="0 0 200 120" class="h-28 w-auto overflow-visible">
+          <!-- Stack of Gold Coins -->
+          <g transform="translate(60, 65)">
+            <ellipse cx="20" cy="30" rx="18" ry="6" fill="#f59e0b" />
+            <ellipse cx="20" cy="25" rx="18" ry="6" fill="#fbbf24" />
+            <ellipse cx="20" cy="20" rx="18" ry="6" fill="#fcd34d" />
+            <ellipse cx="20" cy="15" rx="18" ry="6" fill="#fef08a" stroke="#f59e0b" stroke-width="1" />
+          </g>
+
+          <!-- Kneeling Person with Big Coin -->
+          <g transform="translate(15, 30)">
+            <circle cx="35" cy="40" r="16" fill="#fbbf24" stroke="#f59e0b" stroke-width="2" />
+            <circle cx="20" cy="25" r="5" fill="#fde68a" />
+            <path d="M12 32 Q 20 30 28 35 L 25 50 L 10 50 Z" fill="#0284c7" />
+            <path d="M10 50 L 30 50 L 35 68 L 5 68 Z" fill="#1e1b4b" />
+          </g>
+
+          <!-- Standing Person 1 (Yellow Pants) -->
+          <g transform="translate(115, 10)">
+            <circle cx="15" cy="12" r="6" fill="#fde68a" />
+            <path d="M8 20 L 22 20 L 20 48 L 10 48 Z" fill="#06b6d4" />
+            <path d="M10 48 L 20 48 L 22 85 L 8 85 Z" fill="#fbbf24" />
+            <!-- Pointing Arm -->
+            <path d="M8 22 L -8 5 L -4 2 Z" fill="#06b6d4" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
+          </g>
+
+          <!-- Standing Person 2 (Red Dress) -->
+          <g transform="translate(145, 18)">
+            <circle cx="12" cy="10" r="5.5" fill="#fde68a" />
+            <path d="M6 17 L 18 17 L 20 45 L 4 45 Z" fill="#f43f5e" />
+            <path d="M6 45 L 18 45 L 16 80 L 8 80 Z" fill="#312e81" />
+          </g>
+        </svg>
       </div>
     </header>
+    
     
     
     
