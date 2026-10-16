@@ -18,43 +18,52 @@
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
 
-    <!-- Top Hero Banner with Illustration Style -->
-    <header class="w-full pt-8 pb-6 px-4 max-w-md mx-auto text-white flex flex-col items-center relative overflow-hidden">
-        <div class="w-full flex justify-between items-center mb-4 px-2">
-            <div class="inline-flex items-center space-x-1.5 bg-white/20 backdrop-blur-md border border-white/30 px-3.5 py-1 rounded-full text-white text-xs font-bold shadow-sm">
-                <span>JOIN US!</span>
+    <!-- Top Hero Section matching exact reference design -->
+    <header class="w-full pt-8 pb-4 px-4 max-w-md mx-auto text-white flex flex-col items-center">
+        <div class="w-full flex flex-col items-start px-2 relative">
+            <!-- JOIN US Bubble Badge -->
+            <div class="bg-white/30 backdrop-blur-md px-4 py-1.5 rounded-xl text-white font-black text-xs tracking-wider shadow-md mb-3 border border-white/20">
+                JOIN US!
             </div>
-        </div>
-        
-        <div class="w-full text-left px-2 mb-4">
+            
             <h2 class="text-xl sm:text-2xl font-bold tracking-tight leading-snug">
                 As an official Chip Seller to earn <span class="text-yellow-300 font-extrabold">₹500K monthly.</span>
             </h2>
         </div>
 
-        <!-- Illustration Graphic Placeholder -->
-        <div class="w-full px-2 flex justify-center items-center">
-            <div class="w-full h-32 bg-gradient-to-r from-purple-800/40 to-indigo-800/40 rounded-2xl flex items-center justify-center border border-white/10 relative overflow-hidden">
-                <div class="flex items-center space-x-6 z-10">
-                    <div class="w-10 h-14 bg-white/20 rounded-t-full flex items-center justify-center">
-                        <i class="fa-solid fa-user text-white text-lg"></i>
+        <!-- Graphic Illustration matching reference -->
+        <div class="w-full px-2 mt-4 flex justify-center">
+            <div class="w-full h-36 bg-gradient-to-tr from-[#4c1d95] to-[#7c3aed] rounded-3xl flex items-end justify-between px-6 pt-4 relative overflow-hidden shadow-inner border border-white/10">
+                <!-- Stacked Coins Graphic -->
+                <div class="absolute bottom-0 right-8 flex flex-col items-center">
+                    <div class="w-12 h-3 bg-yellow-400 rounded-full border border-yellow-300 shadow"></div>
+                    <div class="w-12 h-3 bg-yellow-400 rounded-full border border-yellow-300 shadow -mt-1"></div>
+                    <div class="w-12 h-3 bg-yellow-400 rounded-full border border-yellow-300 shadow -mt-1"></div>
+                    <div class="w-14 h-4 bg-yellow-500 rounded-full border border-yellow-300 shadow -mt-1"></div>
+                </div>
+                <!-- People Illustration Silhouette Elements -->
+                <div class="w-full flex justify-between items-end opacity-90 pb-0">
+                    <div class="flex items-end space-x-2">
+                        <div class="w-8 h-12 bg-indigo-300 rounded-t-full"></div>
+                        <div class="w-10 h-10 bg-yellow-400 rounded-full mb-1 flex items-center justify-center text-xs font-bold text-indigo-950">₹</div>
                     </div>
-                    <div class="w-16 h-16 bg-yellow-400/30 rounded-full flex items-center justify-center border border-yellow-300/50">
-                        <span class="text-yellow-300 font-bold text-2xl">₹</span>
-                    </div>
-                    <div class="w-10 h-14 bg-white/20 rounded-t-full flex items-center justify-center">
-                        <i class="fa-solid fa-user-tie text-white text-lg"></i>
+                    <div class="flex items-end space-x-2">
+                        <div class="w-8 h-16 bg-sky-400 rounded-t-full"></div>
+                        <div class="w-8 h-16 bg-amber-200 rounded-t-full"></div>
+                        <div class="w-8 h-14 bg-pink-400 rounded-t-full"></div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Form Card Section -->
+    <!-- Main White Bottom Card Form Section -->
     <main class="w-full max-w-md mx-auto px-4 flex-1 flex flex-col justify-end">
         <div class="bg-white rounded-t-[35px] p-6 shadow-2xl border-t border-white/20">
-            <div class="text-center mb-6">
-                <h3 class="text-xs font-bold tracking-widest text-slate-400 uppercase">//// Sign up & Earn ////</h3>
+            <div class="text-center mb-5 flex items-center justify-center space-x-2">
+                <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
+                <h3 class="text-xs font-extrabold tracking-widest text-slate-800 uppercase">Sign up & Earn</h3>
+                <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
             </div>
 
             <form id="signup-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
@@ -75,7 +84,7 @@
                         <input type="text" id="otp" required placeholder="Type OTP" maxlength="6"
                             class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
                         <button type="button" id="otp-btn" onclick="sendOTP()" 
-                            class="mr-2 px-4 py-2 bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-semibold rounded-xl transition shadow-md active:scale-95">
+                            class="mr-2 px-5 py-2.5 bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-bold rounded-xl transition shadow-md active:scale-95">
                             Request
                         </button>
                     </div>
@@ -91,7 +100,7 @@
 
                 <!-- Submit Button -->
                 <button type="submit" id="submit-btn"
-                    class="w-full mt-3 py-4 px-6 bg-[#5b21b6] hover:bg-[#4c1d95] text-white font-bold rounded-2xl shadow-lg shadow-purple-900/20 transition active:scale-[0.98] flex items-center justify-center space-x-2">
+                    class="w-full mt-3 py-4 px-6 bg-[#5b21b6] hover:bg-[#4c1d95] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-900/25 transition active:scale-[0.98] flex items-center justify-center space-x-2">
                     <span>Sign up</span>
                 </button>
             </form>
