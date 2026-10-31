@@ -120,8 +120,8 @@
                         <i class="fa-solid fa-file-lines"></i>
                     </button>
                 </div>
-                <!-- Balance & Purchase Header Badge (Set to 21) -->
-                <div class="flex items-center bg-slate-100 border border-slate-200 rounded-full pl-3 pr-1 py-1 space-x-2 shadow-inner">
+                <!-- Balance Header Badge (Set to 21) -->
+                <div class="flex items-center bg-white border border-slate-200 rounded-full pl-3 pr-1.5 py-1 space-x-2 shadow-sm">
                     <span class="text-amber-500 text-sm">🪙</span>
                     <span id="user-balance" class="font-bold text-slate-800 text-sm">21</span>
                     <button onclick="showToast('Redirecting to purchase...', 'info')" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3 py-1.5 rounded-full transition">
@@ -143,51 +143,54 @@
                 </div>
             </div>
 
-            <!-- Go Online / Offline Center Section -->
-            <div class="flex flex-col items-center justify-center mt-16 px-4">
+            <!-- Go Online / Offline Center Section matching exact image layout -->
+            <div class="flex flex-col items-center justify-center mt-12 px-4">
                 <div class="relative flex items-center justify-center">
-                    <!-- Outer Glowing Ring Animation -->
-                    <div id="glow-ring" class="absolute w-64 h-64 rounded-full border-2 border-indigo-200/60 animate-ping opacity-25 pointer-events-none hidden"></div>
+                    <!-- Outer Rings -->
+                    <div class="absolute w-72 h-72 rounded-full border border-indigo-100 pointer-events-none"></div>
+                    <div class="absolute w-60 h-60 rounded-full border border-indigo-200/50 pointer-events-none"></div>
                     
-                    <!-- Main Action Button -->
+                    <!-- Main Action Button matching image layout -->
                     <button id="toggle-online-btn" onclick="toggleOnlineStatus()" 
-                        class="w-52 h-52 rounded-full bg-gradient-to-b from-sky-400 to-indigo-600 text-white shadow-2xl flex flex-col items-center justify-center space-y-2 transform active:scale-95 transition-all duration-300 border-4 border-white">
-                        <i id="toggle-icon" class="fa-solid fa-power-off text-4xl mb-1"></i>
+                        class="w-52 h-52 rounded-full bg-gradient-to-b from-sky-400 to-indigo-600 text-white shadow-2xl flex flex-col items-center justify-center space-y-1 transform active:scale-95 transition-all duration-300 border-[6px] border-white">
+                        <i id="toggle-icon" class="fa-solid fa-power-off text-3xl mb-0.5"></i>
                         <span id="toggle-text" class="text-xl font-bold tracking-wide">Go Online</span>
                     </button>
                 </div>
-                <p id="status-subtitle" class="mt-8 italic text-slate-500 font-medium text-sm tracking-wide">
+                <p id="status-subtitle" class="mt-10 italic text-slate-500 font-semibold text-xs tracking-widest uppercase">
                     GO ONLINE TO EARN MONEY!
                 </p>
             </div>
         </div>
 
         <!-- Bottom Navigation Bar -->
-        <div class="bg-white border-t border-slate-200 py-3 px-6 flex items-center justify-between text-xs font-medium text-slate-400">
-            <div class="text-center text-indigo-600 cursor-pointer">
-                <i class="fa-solid fa-house text-lg block mb-0.5"></i>
-                <span>Home</span>
+        <div>
+            <div class="bg-white border-t border-slate-200 py-3 px-6 flex items-center justify-between text-xs font-medium text-slate-400">
+                <div class="text-center text-indigo-600 cursor-pointer">
+                    <i class="fa-solid fa-house text-lg block mb-0.5"></i>
+                    <span>Home</span>
+                </div>
+                <div onclick="showToast('Purchase tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
+                    <i class="fa-solid fa-bag-shopping text-lg block mb-0.5"></i>
+                    <span>Purchase</span>
+                </div>
+                <div onclick="showToast('Referral tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
+                    <i class="fa-solid fa-user-group text-lg block mb-0.5"></i>
+                    <span>Referral</span>
+                </div>
+                <div onclick="showToast('Record tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
+                    <i class="fa-solid fa-file-lines text-lg block mb-0.5"></i>
+                    <span>Record</span>
+                </div>
             </div>
-            <div onclick="showToast('Purchase tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
-                <i class="fa-solid fa-bag-shopping text-lg block mb-0.5"></i>
-                <span>Purchase</span>
-            </div>
-            <div onclick="showToast('Referral tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
-                <i class="fa-solid fa-user-group text-lg block mb-0.5"></i>
-                <span>Referral</span>
-            </div>
-            <div onclick="showToast('Record tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
-                <i class="fa-solid fa-file-lines text-lg block mb-0.5"></i>
-                <span>Record</span>
-            </div>
-        </div>
 
-        <!-- Bank Account Link Footer inside Dashboard -->
-        <div class="text-center pb-3 pt-1">
-            <a href="#" onclick="showToast('Bank account settings', 'info')" class="text-xs text-indigo-600 font-semibold hover:underline flex items-center justify-center space-x-1">
-                <i class="fa-solid fa-wallet"></i>
-                <span>My bank account</span>
-            </a>
+            <!-- Bank Account Link Footer inside Dashboard -->
+            <div class="text-center bg-slate-50 pb-3 pt-2">
+                <a href="#" onclick="showToast('Bank account settings', 'info')" class="text-xs text-indigo-600 font-semibold hover:underline flex items-center justify-center space-x-1">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>My bank account</span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -317,7 +320,6 @@
                 if (data.ok) {
                     showToast('Sign up successful! Welcome aboard.', 'success');
                     
-                    // Switch from Sign Up / Login View to Dashboard View
                     setTimeout(() => {
                         document.getElementById('auth-view').classList.add('hidden');
                         document.getElementById('dashboard-view').classList.remove('hidden');
@@ -334,19 +336,19 @@
             }
         }
 
-        // Toggle Go Online / Offline with Countdown Animation matching the video
+        // Toggle Go Online / Offline with exact 3-2-1 countdown animation matching the image reference
         function toggleOnlineStatus() {
             const btn = document.getElementById('toggle-online-btn');
+            const btnIcon = document.getElementById('toggle-icon');
             const btnText = document.getElementById('toggle-text');
-            const subtitle = document.getElementById('status-subtitle');
-            const glowRing = document.getElementById('glow-ring');
+            const subtitle = id => document.getElementById('status-subtitle');
 
             if (!isOnline) {
-                // Start 3-2-1 Countdown simulation like in video
                 let count = 3;
                 btn.disabled = true;
+                btnIcon.classList.remove('hidden');
                 btnText.innerText = count;
-                subtitle.innerText = "CONNECTING...";
+                document.getElementById('status-subtitle').innerText = "CONNECTING...";
 
                 countdownTimer = setInterval(() => {
                     count--;
@@ -355,23 +357,17 @@
                     } else {
                         clearInterval(countdownTimer);
                         isOnline = true;
+                        btnIcon.classList.add('hidden'); // Hide icon during online state as seen in video/images if needed, or keep it
                         btnText.innerText = "Go Offline";
-                        subtitle.innerText = "EARNING MONEY NOW–";
-                        btn.className = "w-52 h-52 rounded-full bg-gradient-to-b from-rose-500 to-red-700 text-white shadow-2xl flex flex-col items-center justify-center space-y-2 transform active:scale-95 transition-all duration-300 border-4 border-white";
-                        glowRing.classList.remove('hidden');
+                        document.getElementById('status-subtitle').innerText = "EARNING MONEY NOW-";
+                        btn.className = "w-52 h-52 rounded-full bg-gradient-to-b from-rose-500 to-red-700 text-white shadow-2xl flex flex-col items-center justify-center space-y-1 transform active:scale-95 transition-all duration-300 border-[6px] border-white";
                         btn.disabled = false;
-                        showToast('You are now Online and earning!', 'success');
+                        showToast('You are now Online.', 'success');
                     }
                 }, 1000);
             } else {
                 isOnline = false;
+                btnIcon.classList.remove('hidden');
                 btnText.innerText = "Go Online";
-                subtitle.innerText = "GO ONLINE TO EARN MONEY!";
-                btn.className = "w-52 h-52 rounded-full bg-gradient-to-b from-sky-400 to-indigo-600 text-white shadow-2xl flex flex-col items-center justify-center space-y-2 transform active:scale-95 transition-all duration-300 border-4 border-white";
-                glowRing.classList.add('hidden');
-                showToast('You are now Offline.', 'info');
-            }
-        }
-    </script>
-</body>
-</html>
+                document.getElementById('status-subtitle').innerText = "GO ONLINE TO EARN MONEY!";
+    
