@@ -21,7 +21,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Page background outside mobile container */
     body {
       background-color: #f0f2f5;
       display: flex;
@@ -200,7 +199,6 @@
       transition: background-color 0.3s ease;
     }
 
-    /* Online state light cyan outer ring */
     .outer-glow-ring.online-glow {
       background-color: #e0f7fa !important;
     }
@@ -248,7 +246,6 @@
       transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
     }
 
-    /* Online state vibrant cyan-blue inner button */
     .go-online-btn.online-btn {
       background: linear-gradient(180deg, #29b6f6 0%, #0288d1 100%) !important;
       box-shadow: 0 10px 25px rgba(2, 136, 209, 0.35) !important;
@@ -624,7 +621,7 @@
       document.getElementById('dashboard-section').classList.remove('hidden');
     }
 
-    /* --- Online / Offline Button Logic Fixed --- */
+    /* --- Fixed Online / Offline Toggle Logic --- */
     var isOnline = false;
     var isCounting = false;
 
@@ -637,8 +634,8 @@
       var glowRing = document.getElementById('glowRing');
       var actionBtn = document.getElementById('actionBtn');
 
+      // Agar user abhi OFFLINE hai, tabhi "Go Online" click karne par 3-2-1 countdown chalega
       if (!isOnline) {
-        // Sirf jab Offline ho (Purple Button) tabhi 3-2-1 Countdown chalega
         isCounting = true;
         btnIcon.style.display = 'none';
         
@@ -655,7 +652,6 @@
             isCounting = false;
             isOnline = true;
             
-            // Countdown poora hone par Cyan Blue theme lag jayegi
             glowRing.classList.add('online-glow');
             actionBtn.classList.add('online-btn');
             
@@ -667,10 +663,9 @@
         }, 1000);
 
       } else {
-        // Online se Offline karte waqt bina countdown ke instantly purple color aur original state me switch ho jayega
+        // Agar user ONLINE hai, toh "Go Offline" click karte hi bina countdown ke turant offline ho jayega
         isOnline = false;
         
-        // Instant color change back to Purple
         glowRing.classList.remove('online-glow');
         actionBtn.classList.remove('online-btn');
         
