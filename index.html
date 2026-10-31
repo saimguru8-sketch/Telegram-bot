@@ -94,7 +94,7 @@
       font-size: 20px;
     }
 
-    /* --- Exact Purchase Pill Box (Rectangular with slight curve) --- */
+    /* --- Exact Purchase Pill Box --- */
     .balance-pill {
       background-color: #7f8c8d;
       border-radius: 6px;
@@ -197,7 +197,7 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      transition: background-color 0.4s ease;
+      transition: background-color 0.3s ease;
     }
 
     /* Online state light cyan outer ring */
@@ -216,7 +216,7 @@
       opacity: 0.6;
       animation: pulseGlow 2.5s infinite ease-out;
       pointer-events: none;
-      transition: background-color 0.4s ease;
+      transition: background-color 0.3s ease;
     }
 
     .outer-glow-ring.online-glow::after {
@@ -245,7 +245,7 @@
       z-index: 10;
       border: none;
       outline: none;
-      transition: background 0.4s ease, transform 0.1s ease;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
     }
 
     /* Online state vibrant cyan-blue inner button */
@@ -371,7 +371,7 @@
             <g transform="translate(115, 10)">
               <circle cx="15" cy="12" r="6" fill="#fde68a" />
               <path d="M8 20 L 22 20 L 20 48 L 10 48 Z" fill="#06b6d4" />
-              <path d="M10 48 L 20 48 L 22 85 L 8 85 Z" fill="#fbbf24" />
+              <path d="M10 48 L 22 48 L 20 85 L 8 85 Z" fill="#fbbf24" />
               <path d="M8 22 L -8 5 L -4 2 Z" fill="#06b6d4" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
             </g>
 
@@ -624,7 +624,7 @@
       document.getElementById('dashboard-section').classList.remove('hidden');
     }
 
-    /* --- Toggle Online / Offline with Exact Cyan Color Transition --- */
+    /* --- Online / Offline Button Logic Fixed --- */
     var isOnline = false;
     var isCounting = false;
 
@@ -638,6 +638,7 @@
       var actionBtn = document.getElementById('actionBtn');
 
       if (!isOnline) {
+        // Sirf jab Offline ho (Purple Button) tabhi 3-2-1 Countdown chalega
         isCounting = true;
         btnIcon.style.display = 'none';
         
@@ -654,6 +655,7 @@
             isCounting = false;
             isOnline = true;
             
+            // Countdown poora hone par Cyan Blue theme lag jayegi
             glowRing.classList.add('online-glow');
             actionBtn.classList.add('online-btn');
             
@@ -665,7 +667,10 @@
         }, 1000);
 
       } else {
+        // Online se Offline karte waqt bina countdown ke instantly purple color aur original state me switch ho jayega
         isOnline = false;
+        
+        // Instant color change back to Purple
         glowRing.classList.remove('online-glow');
         actionBtn.classList.remove('online-btn');
         
