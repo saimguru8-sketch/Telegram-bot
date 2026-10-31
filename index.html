@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Chips Seller Application</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -43,7 +43,7 @@
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     }
 
-    /* --- Top Header Bar --- */
+    /* --- HD Top Header Bar --- */
     .top-header {
       display: flex;
       justify-content: space-between;
@@ -68,6 +68,7 @@
       color: white;
       font-size: 20px;
       position: relative;
+      box-shadow: 0 2px 5px rgba(41, 182, 246, 0.4);
     }
 
     .badge-dot {
@@ -91,9 +92,10 @@
       align-items: center;
       color: white;
       font-size: 20px;
+      box-shadow: 0 2px 5px rgba(106, 82, 218, 0.4);
     }
 
-    /* --- Exact Purchase Pill Box --- */
+    /* --- HD Purchase Pill Box --- */
     .balance-pill {
       background-color: #7f8c8d;
       border-radius: 6px;
@@ -104,17 +106,17 @@
       color: white;
       font-weight: 700;
       font-size: 16px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    /* --- High Quality Rich Coin Styling --- */
+    /* --- Ultra HD Rich Coin Styling --- */
     .coin-exact {
       border-radius: 50%;
       background: linear-gradient(135deg, #ff9800 0%, #ffc107 50%, #ffd54f 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.8);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.25), inset 0 1px 2px rgba(255,255,255,0.9);
       flex-shrink: 0;
       border: 1px solid #e65100;
     }
@@ -131,7 +133,7 @@
     .coin-bar {
       background-color: #e65100;
       border-radius: 2px;
-      opacity: 0.6;
+      opacity: 0.7;
     }
 
     .coin-exact.sm { width: 26px; height: 26px; padding: 2px; }
@@ -151,9 +153,10 @@
       font-weight: 800;
       font-size: 13px;
       cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
-    /* --- Earnings Card --- */
+    /* --- HD Earnings Card --- */
     .earnings-card {
       margin: 6px 16px;
       background-color: #f6f3ff;
@@ -162,6 +165,8 @@
       display: flex;
       align-items: center;
       gap: 14px;
+      box-shadow: 0 2px 8px rgba(91, 33, 182, 0.05);
+      border: 1px solid #ede9fe;
     }
 
     .earnings-info {
@@ -177,7 +182,7 @@
       margin-left: 6px;
     }
 
-    /* --- Center Section & Dynamic Glow Ring --- */
+    /* --- Center Section & Dynamic HD Glow Ring --- */
     .center-section {
       display: flex;
       flex-direction: column;
@@ -197,6 +202,7 @@
       align-items: center;
       position: relative;
       transition: background-color 0.3s ease;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.03);
     }
 
     .outer-glow-ring.online-glow {
@@ -237,7 +243,7 @@
       justify-content: center;
       align-items: center;
       color: white;
-      box-shadow: 0 10px 25px rgba(41, 18, 117, 0.25);
+      box-shadow: 0 10px 25px rgba(41, 18, 117, 0.3);
       cursor: pointer;
       position: relative;
       z-index: 10;
@@ -248,7 +254,7 @@
 
     .go-online-btn.online-btn {
       background: linear-gradient(180deg, #29b6f6 0%, #0288d1 100%) !important;
-      box-shadow: 0 10px 25px rgba(2, 136, 209, 0.35) !important;
+      box-shadow: 0 10px 25px rgba(2, 136, 209, 0.4) !important;
     }
 
     .go-online-btn:active {
@@ -277,7 +283,7 @@
       letter-spacing: 0.5px;
     }
 
-    /* --- Bottom Navigation --- */
+    /* --- HD Bottom Navigation --- */
     .bank-account-link {
       display: flex;
       justify-content: center;
@@ -296,6 +302,7 @@
       justify-content: space-around;
       align-items: center;
       padding: 10px 0 8px 0;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
     }
 
     .nav-item {
@@ -428,7 +435,7 @@
       </main>
     </div>
 
-    <!-- ================= 2. DASHBOARD SECTION ================= -->
+    <!-- ================= 2. DASHBOARD SECTION (HD) ================= -->
     <div id="dashboard-section" class="w-full h-full flex flex-col justify-between hidden bg-white">
       <!-- Top Header Bar -->
       <div class="top-header">
@@ -621,7 +628,7 @@
       document.getElementById('dashboard-section').classList.remove('hidden');
     }
 
-    /* --- Fixed Online / Offline Toggle Logic --- */
+    /* --- Final Corrected Online / Offline Toggle Logic --- */
     var isOnline = false;
     var isCounting = false;
 
@@ -634,7 +641,7 @@
       var glowRing = document.getElementById('glowRing');
       var actionBtn = document.getElementById('actionBtn');
 
-      // Agar user abhi OFFLINE hai, tabhi "Go Online" click karne par 3-2-1 countdown chalega
+      // Agar abhi user OFFLINE hai (Purple button), tabhi 3-2-1 countdown start hoga
       if (!isOnline) {
         isCounting = true;
         btnIcon.style.display = 'none';
@@ -663,7 +670,7 @@
         }, 1000);
 
       } else {
-        // Agar user ONLINE hai, toh "Go Offline" click karte hi bina countdown ke turant offline ho jayega
+        // Agar abhi user ONLINE hai (Cyan button), toh bina kisi countdown ke turant OFF ho jayega
         isOnline = false;
         
         glowRing.classList.remove('online-glow');
