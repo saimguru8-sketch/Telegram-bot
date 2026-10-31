@@ -616,7 +616,7 @@
       document.getElementById('dashboard-section').classList.remove('hidden');
     }
 
-    /* --- Clean Fixed Toggle Logic with Proper DOM State Management --- */
+    /* --- Final Bulletproof State Toggle Logic --- */
     let activeTimer = null;
     let isOnline = false;
     let isCounting = false;
@@ -628,7 +628,7 @@
       const glowRing = document.getElementById('glowRing');
       const actionBtn = document.getElementById('actionBtn');
 
-      // Agar user ONLINE hai toh turant offline mode (Purple) me switch hoga bina countdown ke
+      // 1. Agar user ONLINE hai ("Go Offline" state), toh turant OFFLINE (Purple) ho jayega bina kisi countdown ke
       if (isOnline) {
         isOnline = false;
         isCounting = false;
@@ -646,9 +646,10 @@
         return;
       }
 
+      // 2. Agar countdown chal raha hai toh dubara click ignore hoga
       if (isCounting) return;
 
-      // Agar user OFFLINE hai toh 3-2-1 countdown start hoga
+      // 3. Agar user OFFLINE hai ("Go Online" state), toh 3-2-1 countdown chalega
       if (!isOnline) {
         isCounting = true;
         btnIcon.style.display = 'none';
