@@ -3,299 +3,477 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Royal Chips Seller</title>
+<title>Chips Seller - Royal</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif}
-#dashboard{display:none;background:white;min-height:100vh;padding-bottom:85px;color:#292653}
-.topbar{background:#5140c8;color:white;padding:20px;display:flex;justify-content:space-between;align-items:center}
-.wallet{font-size:22px;font-weight:bold}
-.screen{display:none;padding:18px}
-.screen.active{display:block}
-.earn{background:#f1ebff;padding:18px;border-radius:15px;margin:12px 0;font-size:18px}
-.power-area{height:370px;display:flex;justify-content:center;align-items:center;flex-direction:column}
-.halo{width:280px;height:280px;border-radius:50%;background:#eee9ff;display:grid;place-items:center}
-.power{width:82%;height:82%;border-radius:50%;border:8px solid #8063f5;background:linear-gradient(120deg,#5842c0,#24206e);color:white;font-size:27px;font-weight:bold}
-.power.online{background:linear-gradient(120deg,#20b8ed,#167ce1);border-color:#65baff}
-.halo.online{background:#c9f8f7}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#5140c8;display:flex;justify-content:space-around;padding:13px 2px}
-.bottom button{background:none;border:0;color:white;font-size:14px}
-.bottom b{display:block;font-size:23px}
-.card{border:2px solid #ddd;border-radius:15px;padding:20px;margin:15px 0}
-.purple{background:#5140c8;color:white;border-radius:15px;padding:20px}
-.title{font-size:24px;font-weight:bold;margin:15px 0}
-.row{padding:20px 5px;border-bottom:1px solid #ddd;font-size:20px}
+body{font-family:'Plus Jakarta Sans',sans-serif;margin:0}
+#royalDashboard{display:none;background:white;min-height:100vh;padding-bottom:85px;color:#292653}
+.royalTop{background:#5140c8;color:white;padding:20px;display:flex;justify-content:space-between;align-items:center}
+.royalWallet{font-size:22px;font-weight:800}
+.royalScreen{display:none;padding:18px}
+.royalScreen.active{display:block}
+.royalEarn{background:#f1ebff;border-radius:14px;padding:18px;margin:10px 0;font-size:17px}
+.royalPowerArea{height:390px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.royalHalo{width:min(75vw,300px);height:min(75vw,300px);border-radius:50%;background:#eee9ff;display:grid;place-items:center}
+.royalPower{width:84%;height:84%;border-radius:50%;border:9px solid #8063f5;background:linear-gradient(120deg,#5842c0,#24206e);color:white;font-size:28px;font-weight:800}
+.royalPower.online{background:linear-gradient(120deg,#20b8ed,#167ce1);border-color:#65baff}
+.royalHalo.online{background:#c9f8f7}
+.royalBottom{position:fixed;bottom:0;left:0;right:0;background:#5140c8;display:flex;justify-content:space-around;padding:12px 2px;z-index:20}
+.royalBottom button{border:0;background:none;color:white;font-size:13px}
+.royalBottom b{display:block;font-size:24px}
+.royalCard{border:2px solid #ddd;border-radius:16px;padding:20px;margin:16px 0}
+.royalRow{padding:20px 5px;border-bottom:1px solid #ddd;font-size:19px}
+.royalPurple{background:linear-gradient(110deg,#604ac7,#252064);color:white;border-radius:15px;padding:20px}
+.royalTitle{font-size:24px;font-weight:800;margin:15px 0}
 </style>
 </head>
 
-<body class="bg-[#5b21b6]">
+<body class="bg-[#5b21b6] min-h-screen">
 
-<!-- LOGIN PAGE -->
-<div id="login-page" class="min-h-screen">
-<header class="p-6 text-white">
-<h2 class="text-2xl font-bold">JOIN US!</h2>
-<p class="mt-3">As an official Chip Seller to earn ₹500K monthly.</p>
+<!-- TOAST -->
+<div id="toast-container" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-md"></div>
+
+<!-- ================= LOGIN PAGE ================= -->
+
+<div id="loginPage">
+
+<header class="w-full pt-6 pb-2 px-4 max-w-md mx-auto">
+<div class="bg-white/20 px-3 py-1 rounded-xl text-white font-extrabold text-xs mb-2 inline-block">
+JOIN US!
+</div>
+
+<h2 class="text-xl font-bold text-white leading-tight max-w-[280px] mb-4">
+As an official Chip Seller to earn
+<span class="text-amber-300 font-extrabold">₹500K monthly.</span>
+</h2>
+
+<div class="w-full flex justify-end h-28 pr-2 -mt-6">
+<svg viewBox="0 0 200 120" class="h-28 w-auto">
+<g transform="translate(60,65)">
+<ellipse cx="20" cy="30" rx="18" ry="6" fill="#f59e0b"/>
+<ellipse cx="20" cy="25" rx="18" ry="6" fill="#fbbf24"/>
+<ellipse cx="20" cy="20" rx="18" ry="6" fill="#fcd34d"/>
+<ellipse cx="20" cy="15" rx="18" ry="6" fill="#fef08a"/>
+</g>
+<g transform="translate(15,30)">
+<circle cx="35" cy="40" r="16" fill="#fbbf24"/>
+<circle cx="20" cy="25" r="5" fill="#fde68a"/>
+<path d="M12 32Q20 30 28 35L25 50H10Z" fill="#0284c7"/>
+<path d="M10 50H30L35 68H5Z" fill="#1e1b4b"/>
+</g>
+<g transform="translate(115,10)">
+<circle cx="15" cy="12" r="6" fill="#fde68a"/>
+<path d="M8 20H22L20 48H10Z" fill="#06b6d4"/>
+<path d="M10 48H20L22 85H8Z" fill="#fbbf24"/>
+</g>
+<g transform="translate(145,18)">
+<circle cx="12" cy="10" r="5.5" fill="#fde68a"/>
+<path d="M6 17H18L20 45H4Z" fill="#f43f5e"/>
+<path d="M6 45H18L16 80H8Z" fill="#312e81"/>
+</g>
+</svg>
+</div>
 </header>
 
-<div class="bg-white rounded-t-[35px] p-6 min-h-[75vh]">
-<h3 class="text-center font-bold mb-6">//// SIGN UP & EARN ////</h3>
+<main class="w-full max-w-md mx-auto px-4 -mt-2">
+<div class="bg-white rounded-t-[35px] p-6 shadow-2xl min-h-[75vh]">
 
-<form id="loginForm" class="space-y-4">
-
-<div class="flex border rounded-xl">
-<span class="p-3 border-r">+91</span>
-<input id="phone" type="tel" maxlength="10"
-placeholder="Type phone number" required
-class="w-full p-3 outline-none">
+<div class="text-center mb-5 flex items-center justify-center gap-2">
+<span class="text-indigo-300 font-bold">////</span>
+<h3 class="text-xs font-extrabold tracking-widest uppercase">Sign up & Earn</h3>
+<span class="text-indigo-300 font-bold">////</span>
 </div>
 
-<div class="flex border rounded-xl">
-<input id="otp" type="text" maxlength="6"
-placeholder="Type OTP" required
-class="w-full p-3 outline-none">
-<button type="button" onclick="requestOTP()"
-class="bg-purple-700 text-white px-4 rounded-xl">Request</button>
+<form id="signup-form" class="space-y-4">
+
+<div class="flex items-center border border-slate-200 rounded-2xl">
+<div class="pl-4 pr-3 py-3.5 border-r font-semibold">+91</div>
+<input type="tel" id="phone" required maxlength="10"
+pattern="[0-9]{10}" placeholder="Type phone number"
+class="w-full px-4 py-3.5 outline-none rounded-2xl">
 </div>
 
-<input id="upline" type="text"
+<div class="flex items-center border border-slate-200 rounded-2xl">
+<input type="text" id="otp" required maxlength="6"
+placeholder="Type OTP"
+class="w-full px-4 py-3.5 outline-none rounded-2xl">
+<button type="button" id="otp-btn" onclick="sendOTP()"
+class="mr-2 px-5 py-3 bg-[#5b21b6] text-white text-xs font-bold rounded-xl">
+Request
+</button>
+</div>
+
+<input type="text" id="upline"
 placeholder="Upline Code (Optional)"
-class="w-full border rounded-xl p-3">
+class="w-full border border-slate-200 rounded-2xl px-4 py-3.5 outline-none">
 
-<button type="submit"
-class="w-full bg-purple-700 text-white p-4 rounded-xl font-bold">
+<button type="submit" id="submit-btn"
+class="w-full py-4 bg-[#5b21b6] text-white font-bold rounded-2xl">
 Sign up
 </button>
+
 </form>
 </div>
+</main>
 </div>
 
-<!-- ROYAL DASHBOARD -->
-<div id="dashboard">
+<!-- ================= ROYAL DASHBOARD ================= -->
 
-<header class="topbar">
-<span style="font-size:24px">♙ Royal</span>
-<div class="wallet">🪙 ₹21.00</div>
+<div id="royalDashboard">
+
+<header class="royalTop">
+<div style="font-size:25px">♙ Royal</div>
+<div class="royalWallet">🪙 ₹21.00</div>
 </header>
 
 <!-- HOME -->
-<section id="home" class="screen active">
-<div class="earn">
-Today's Earnings &nbsp; <b>0</b><br><br>
-Total Earning &nbsp; <b>0</b>
+<section id="rHome" class="royalScreen active">
+
+<div class="royalEarn">
+Today's Earnings &nbsp; <b style="color:#1686df">0</b>
+<br><br>
+Total Earning &nbsp; <b style="color:#1686df">0</b>
 </div>
 
-<div class="power-area">
-<div class="halo" id="halo">
-<button class="power" id="power" onclick="royalPower()">
-⏻<br><span id="powerText">GO ONLINE</span>
+<div class="royalPowerArea">
+
+<div class="royalHalo" id="rHalo">
+<button class="royalPower" id="rPower" onclick="royalPower()">
+⏻<br>
+<span id="rPowerText">GO ONLINE</span>
 </button>
 </div>
-<h3 id="message">GO ONLINE TO EARN MONEY!</h3>
+
+<h2 id="rMessage" class="font-extrabold text-xl text-center mt-5">
+GO ONLINE TO EARN MONEY!
+</h2>
 </div>
 
-<p style="text-align:center;font-size:22px;color:#5140c8">
+<div class="text-center text-xl text-purple-800 mt-4">
 ▣ My bank account
-</p>
+</div>
+
 </section>
 
 <!-- PURCHASE -->
-<section id="purchase" class="screen">
-<h2 class="title">Choose a purchase method</h2>
-<div class="card">
-<h3>Via Rupee</h3>
-<p>Get Extra <b>7.5%</b> Chips</p>
+<section id="rPurchase" class="royalScreen">
+
+<h2 class="royalTitle">Choose a purchase method</h2>
+
+<div class="royalCard" style="border-color:#7659ed;background:#f7f4ff">
+<h2 class="text-xl font-bold text-purple-800">Via Rupee</h2>
+<p class="mt-4">Get Extra <b class="text-amber-500">7.5%</b> Chips</p>
+<p class="mt-3 text-sm text-slate-500">Use UPI to buy Chips</p>
+<p class="mt-4 text-purple-700">⚡ Higher chance of getting sell chips orders</p>
 </div>
-<div class="card">
-<h3>Via USDT</h3>
-<p>Get Extra <b>5.0%</b> Chips</p>
+
+<div class="royalCard">
+<h2 class="text-xl font-bold">Via USDT</h2>
+<p class="mt-4">Get Extra <b class="text-amber-500">5.0%</b> Chips</p>
 </div>
+
 </section>
 
 <!-- REFERRAL -->
-<section id="referral" class="screen">
-<h2 class="title">Referral</h2>
-<div class="purple">
-<h3>Requirement to Upgrade</h3>
-<p>0 / 700,000</p>
-<hr>
-<p>Seed <span style="float:right">Sprout</span></p>
+<section id="rReferral" class="royalScreen">
+
+<div class="flex items-center gap-4 my-5">
+<div class="rounded-full bg-violet-800 text-white w-24 h-24 grid place-items-center text-4xl">🥥</div>
+<div>
+<b class="text-xl">Referral</b>
+<p class="mt-2">Valid till 1st November, 2026</p>
 </div>
-<div class="row" onclick="otherPage('Sub-level Chips Sellers')">
-Sub-level Chips Sellers ›
 </div>
-<div class="row" onclick="otherPage('Refund Management')">
-Refund Management ›
+
+<div class="royalPurple">
+<h3 class="text-xl font-bold">✓ Requirement to Upgrade</h3>
+<p class="mt-6">Requirement to Upgrade <span class="float-right">0/700,000</span></p>
+<div class="h-1 bg-indigo-950 mt-4"></div>
+<div class="flex justify-between mt-3">
+<span>Seed</span><span>Sprout</span>
 </div>
+</div>
+
+<div class="royalRow" onclick="royalOther('Sub-level Chips Sellers')">
+Sub-level Chips Sellers <span class="float-right">›</span>
+</div>
+
+<div class="royalRow" onclick="royalOther('Refund Management')">
+Refund Management <span class="float-right">›</span>
+</div>
+
 </section>
 
 <!-- RECORD -->
-<section id="record" class="screen">
-<h2 class="title">Record</h2>
-<div style="display:flex;justify-content:space-around">
-<button onclick="alert('Earnings')">Earnings</button>
-<button onclick="alert('Referral')">Referral</button>
-<button onclick="alert('Chips')">Chips</button>
+<section id="rRecord" class="royalScreen">
+
+<h2 class="royalTitle">Record</h2>
+
+<div class="flex justify-around bg-violet-50 py-5">
+<button onclick="royalTab(this)">Earnings</button>
+<button onclick="royalTab(this)">Referral</button>
+<button onclick="royalTab(this)">Chips</button>
 </div>
-<p style="text-align:center;margin-top:100px">No Data</p>
+
+<div class="flex justify-center gap-4 my-8">
+<button class="border-2 border-violet-700 rounded-xl px-5 py-3" onclick="royalTab(this)">By Bank</button>
+<button class="border-2 border-violet-700 rounded-xl px-5 py-3" onclick="royalTab(this)">Account</button>
+<button class="border-2 border-violet-700 rounded-xl px-5 py-3">▦</button>
+</div>
+
+<div class="flex justify-between text-sm">
+<span>Date</span><span>Recharge</span><span>Success rate</span>
+</div>
+
+<div class="text-center mt-40 text-slate-500 text-xl">
+▤<br><br>No Data
+</div>
+
 </section>
 
-<!-- OTHER -->
-<section id="other" class="screen">
-<button onclick="showScreen('referral')">‹ Back</button>
-<h2 class="title" id="otherTitle"></h2>
-<p id="otherText" style="text-align:center;margin-top:120px"></p>
+<!-- OTHER PAGES -->
+<section id="rOther" class="royalScreen">
+<button class="text-2xl" onclick="royalShow('rReferral')">‹ Back</button>
+<h2 id="rOtherTitle" class="royalTitle"></h2>
+<p id="rOtherText" class="text-center mt-40 text-xl"></p>
 </section>
 
 <!-- BOTTOM NAV -->
-<nav class="bottom">
-<button onclick="showScreen('home')"><b>⌂</b>Home</button>
-<button onclick="showScreen('purchase')"><b>◉</b>Purchase</button>
-<button onclick="showScreen('referral')"><b>♧</b>Referral</button>
-<button onclick="showScreen('record')"><b>▤</b>Record</button>
+<nav class="royalBottom">
+<button onclick="royalShow('rHome')"><b>⌂</b>Home</button>
+<button onclick="royalShow('rPurchase')"><b>◉</b>Purchase</button>
+<button onclick="royalShow('rReferral')"><b>♧</b>Referral</button>
+<button onclick="royalShow('rRecord')"><b>▤</b>Record</button>
 </nav>
+
 </div>
 
 <script>
 
-/*
-  OTP BACKEND CONFIGURATION:
-  Add your secure server URL here.
-  Do not send OTP codes to Telegram.
+/* IMPORTANT:
+   Put your secure OTP backend URL here.
+   It must support:
+   POST /api/auth/request-otp
+   POST /api/auth/verify-otp
 */
-const API_BASE = "";
+const API_BASE = "https://YOUR-SECURE-BACKEND-URL";
 
-async function requestOTP(){
-  const phone=document.getElementById("phone").value.trim();
+let countdownSeconds = 60;
+let timerInterval = null;
 
-  if(!/^[0-9]{10}$/.test(phone)){
-    alert("Enter valid 10 digit mobile number");
-    return;
-  }
+function showToast(message,type='info'){
+    const container=document.getElementById('toast-container');
+    const toast=document.createElement('div');
 
-  if(!API_BASE){
-    alert("Secure OTP backend is not connected yet.");
-    return;
-  }
+    toast.className='p-3 rounded-xl shadow-lg text-sm text-white mb-2 '+
+    (type==='success'?'bg-emerald-600':type==='error'?'bg-rose-600':'bg-slate-900');
 
-  try{
-    const response=await fetch(API_BASE+"/api/auth/request-otp",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({phone:"+91"+phone})
-    });
+    toast.textContent=message;
+    container.appendChild(toast);
 
-    if(!response.ok) throw new Error();
-    alert("OTP request sent");
-  }catch(e){
-    alert("OTP request failed");
-  }
+    setTimeout(()=>toast.remove(),3500);
 }
 
-document.getElementById("loginForm").addEventListener("submit",async function(e){
-  e.preventDefault();
+/* REQUEST OTP */
+async function sendOTP(){
 
-  const phone=document.getElementById("phone").value.trim();
-  const otp=document.getElementById("otp").value.trim();
-  const upline=document.getElementById("upline").value.trim();
+    const phone=document.getElementById('phone').value.trim();
 
-  if(!API_BASE){
-    alert("OTP verification backend connect karna baaki hai.");
-    return;
-  }
-
-  try{
-    const response=await fetch(API_BASE+"/api/auth/verify-otp",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      credentials:"include",
-      body:JSON.stringify({
-        phone:"+91"+phone,
-        otp:otp,
-        upline:upline
-      })
-    });
-
-    const result=await response.json();
-
-    if(response.ok && result.verified){
-      openRoyalDashboard();
-    }else{
-      alert("Wrong OTP");
+    if(!/^[0-9]{10}$/.test(phone)){
+        showToast('Enter valid 10 digit phone number','error');
+        return;
     }
 
-  }catch(e){
-    alert("Login verification failed");
-  }
+    if(API_BASE.includes('YOUR-SECURE-BACKEND')){
+        showToast('OTP backend URL abhi configure nahi hua hai.','error');
+        return;
+    }
+
+    const btn=document.getElementById('otp-btn');
+    btn.disabled=true;
+
+    try{
+
+        const response=await fetch(API_BASE+'/api/auth/request-otp',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({phone:'+91'+phone})
+        });
+
+        if(!response.ok) throw new Error();
+
+        showToast('OTP request sent successfully','success');
+
+        countdownSeconds=60;
+        btn.innerText='60s';
+
+        timerInterval=setInterval(()=>{
+            countdownSeconds--;
+            btn.innerText=countdownSeconds+'s';
+
+            if(countdownSeconds<=0){
+                clearInterval(timerInterval);
+                timerInterval=null;
+                btn.disabled=false;
+                btn.innerText='Request';
+            }
+        },1000);
+
+    }catch(error){
+        btn.disabled=false;
+        showToast('OTP request failed. Check backend.','error');
+    }
+}
+
+/* VERIFY OTP AND OPEN DASHBOARD */
+document.getElementById('signup-form').addEventListener('submit',async function(event){
+
+    event.preventDefault();
+
+    const phone=document.getElementById('phone').value.trim();
+    const otp=document.getElementById('otp').value.trim();
+    const upline=document.getElementById('upline').value.trim();
+
+    if(!/^[0-9]{10}$/.test(phone)||otp.length<4){
+        showToast('Enter valid phone number and OTP','error');
+        return;
+    }
+
+    if(API_BASE.includes('YOUR-SECURE-BACKEND')){
+        showToast('OTP verification backend configure karna baaki hai.','error');
+        return;
+    }
+
+    const btn=document.getElementById('submit-btn');
+    btn.disabled=true;
+    btn.innerText='Verifying...';
+
+    try{
+
+        const response=await fetch(API_BASE+'/api/auth/verify-otp',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            credentials:'include',
+            body:JSON.stringify({
+                phone:'+91'+phone,
+                otp:otp,
+                upline:upline
+            })
+        });
+
+        const result=await response.json();
+
+        if(!response.ok || result.verified!==true){
+            throw new Error('Verification failed');
+        }
+
+        document.getElementById('loginPage').style.display='none';
+        document.getElementById('royalDashboard').style.display='block';
+
+        royalShow('rHome');
+        showToast('Login successful! Welcome.','success');
+
+    }catch(error){
+        showToast('OTP verification failed.','error');
+    }finally{
+        btn.disabled=false;
+        btn.innerText='Sign up';
+    }
+
 });
 
-function openRoyalDashboard(){
-  document.getElementById("login-page").style.display="none";
-  document.getElementById("dashboard").style.display="block";
-  showScreen("home");
+/* DASHBOARD NAVIGATION */
+function royalShow(id){
+
+    document.querySelectorAll('.royalScreen').forEach(screen=>{
+        screen.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
 }
 
-function showScreen(id){
-  document.querySelectorAll("#dashboard .screen").forEach(s=>{
-    s.classList.remove("active");
-  });
-  document.getElementById(id).classList.add("active");
+function royalOther(title){
+
+    document.getElementById('rOtherTitle').innerText=title;
+
+    document.getElementById('rOtherText').innerText=
+    title==='Sub-level Chips Sellers'
+    ?'Upgrade to Sprout to obtain the feature. Keep going!'
+    :'No Data';
+
+    royalShow('rOther');
 }
 
-function otherPage(title){
-  document.getElementById("otherTitle").innerText=title;
-  document.getElementById("otherText").innerText=
-    title==="Sub-level Chips Sellers"
-    ?"Upgrade to Sprout to obtain the feature. Keep going!"
-    :"No Data";
-  showScreen("other");
+function royalTab(button){
+
+    button.parentElement.querySelectorAll('button').forEach(btn=>{
+        btn.style.background='';
+        btn.style.color='';
+    });
+
+    button.style.background='#5140c8';
+    button.style.color='white';
 }
 
-let online=false;
-let counting=false;
+/* ONLINE / OFFLINE BUTTON */
+let royalOnline=false;
+let royalCounting=false;
 
 function royalPower(){
-  if(counting)return;
 
-  if(online){
-    online=false;
-    updatePower();
-    return;
-  }
+    if(royalCounting)return;
 
-  counting=true;
-  let count=3;
-  document.getElementById("powerText").innerText=count;
-
-  let timer=setInterval(()=>{
-    count--;
-
-    if(count>0){
-      document.getElementById("powerText").innerText=count;
-    }else{
-      clearInterval(timer);
-      online=true;
-      counting=false;
-      updatePower();
+    if(royalOnline){
+        royalOnline=false;
+        updateRoyalPower();
+        return;
     }
-  },1000);
+
+    royalCounting=true;
+    let count=3;
+
+    document.getElementById('rPowerText').innerText=count;
+
+    const timer=setInterval(()=>{
+
+        count--;
+
+        if(count>0){
+            document.getElementById('rPowerText').innerText=count;
+        }else{
+
+            clearInterval(timer);
+            royalOnline=true;
+            royalCounting=false;
+            updateRoyalPower();
+
+        }
+
+    },1000);
 }
 
-function updatePower(){
-  const power=document.getElementById("power");
-  const halo=document.getElementById("halo");
+function updateRoyalPower(){
 
-  power.classList.toggle("online",online);
-  halo.classList.toggle("online",online);
+    const power=document.getElementById('rPower');
+    const halo=document.getElementById('rHalo');
 
-  document.getElementById("powerText").innerText=
-    online?"GO OFFLINE":"GO ONLINE";
+    power.classList.toggle('online',royalOnline);
+    halo.classList.toggle('online',royalOnline);
 
-  document.getElementById("message").innerText=
-    online?"EARNING MONEY NOW~":"GO ONLINE TO EARN MONEY!";
+    document.getElementById('rPowerText').innerText=
+    royalOnline?'GO OFFLINE':'GO ONLINE';
+
+    document.getElementById('rMessage').innerText=
+    royalOnline?'EARNING MONEY NOW~':'GO ONLINE TO EARN MONEY!';
 }
 
 </script>
+
 </body>
 </html>
